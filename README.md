@@ -42,6 +42,17 @@ Meta skill for building new Claude Code skills. Use it to create your own.
 
 ---
 
+## The Workflow
+
+**Start here → follow in order:**
+
+1. `brand-identity-skill.skill` — define your brand first
+2. `prompt-playbook.md` — build your content system
+3. `NotebookLMSkill.md` — research and generate assets
+4. `WrapUpSkill.md` — save every session
+
+---
+
 ## Who This Is For
 
 Creators and builders who want to use Claude Code seriously — not just for coding, but for content, strategy, and brand building.
