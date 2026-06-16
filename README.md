@@ -44,12 +44,42 @@ Meta skill for building new Claude Code skills. Use it to create your own.
 
 ## The Workflow
 
-**Start here → follow in order:**
+Here is how the tools in this repository work together to help you build your personal brand:
 
-1. `brand-identity-skill.skill` — define your brand first
-2. `prompt-playbook.md` — build your content system
-3. `NotebookLMSkill.md` — research and generate assets
-4. `WrapUpSkill.md` — save every session
+### Data & Execution Flow:
+
+```text
+       [ Start with any Brand URL ] (Instagram, website, or social media link)
+                    │
+                    ▼
+     1. brand-identity-skill.skill
+        ├─ Analyzes the brand's style, colors, fonts, and tone
+        └─ Creates a complete Brand Identity HTML Guidelines document
+                    │
+                    ▼
+     2. prompt-playbook.md
+        ├─ Finds your target niche and audience
+        └─ Guides you step-by-step to build your content calendar and carousels
+                    │
+                    ▼
+     3. NotebookLMSkill.md
+        ├─ Connects with Google NotebookLM to build research sources
+        └─ Automates creation of audio podcasts, summaries, and infographics
+                    │
+                    ▼
+     4. WrapUpSkill.md
+        ├─ Saves a summary of what you built, decided, and learned today
+        └─ Prepares your next session tasks so you never lose momentum
+                    │
+                    ▼
+     [ A Polished & Growing Personal Brand! ]
+```
+
+### Why use this order?
+1. **Define First:** You cannot create content before knowing your brand's voice and colors (`brand-identity-skill.skill`).
+2. **Strategy Second:** Once your style is set, build your plan and content templates (`prompt-playbook.md`).
+3. **Research & Scale Third:** Gather deep knowledge and turn them into rich media like podcasts using AI (`NotebookLMSkill.md`).
+4. **Log Daily:** Always save your progress so you can pick up exactly where you left off tomorrow (`WrapUpSkill.md`).
 
 ---
 
