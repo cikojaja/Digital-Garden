@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartKartoffel — Brand Identity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lexend', sans-serif;
+      background: #f5fafc;
+      color: #171d1e;
+      padding: 48px 24px 100px;
+    }
+
+    .page { max-width: 960px; margin: 0 auto; }
+
+    /* ── Cover ── */
+    .cover {
+      background: linear-gradient(135deg, #006876 0%, #12b0c5 100%);
+      border-radius: 28px;
+      padding: 56px 52px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+    .cover img { width: 110px; height: 110px; object-fit: contain; border-radius: 22px; background: rgba(255,255,255,0.15); padding: 8px; flex-shrink: 0; }
+    .cover-text h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 44px; font-weight: 900; letter-spacing: -1.5px; }
+    .cover-text p { font-size: 15px; opacity: .75; margin-top: 6px; font-weight: 300; }
+    .cover-text .pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.18); padding: 5px 14px; border-radius: 20px; letter-spacing: 1.2px; text-transform: uppercase; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 52px; }
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+      color: #006876; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title span { opacity: .45; font-size: 11px; text-transform: none; letter-spacing: 0; font-weight: 400; font-family: 'Lexend', sans-serif; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: #dee3e5; }
+
+    /* ── Palette grid ── */
+    .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .palette-3 { grid-template-columns: repeat(3, 1fr); }
+    .palette-2 { grid-template-columns: repeat(2, 1fr); }
+    .swatch { border-radius: 16px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+    .swatch-color { height: 72px; }
+    .swatch-info { background: #fff; padding: 12px 14px; }
+    .swatch-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; color: #171d1e; }
+    .swatch-hex  { font-size: 11px; color: #6d797c; margin-top: 2px; font-family: monospace; letter-spacing: .5px; }
+    .swatch-role { font-size: 10px; color: #9aabae; margin-top: 3px; line-height: 1.3; }
+
+    /* ── Surface grid ── */
+    .surface-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    /* ── Gradients ── */
+    .grad-list { display: flex; flex-direction: column; gap: 12px; }
+    .grad-card { border-radius: 16px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+    .grad-preview { height: 68px; display: flex; align-items: center; padding: 0 22px; }
+    .grad-preview span { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.2); }
+    .grad-info { background: #fff; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; }
+    .grad-label { font-size: 12px; font-weight: 600; color: #3d494b; }
+    .grad-code  { font-family: monospace; font-size: 11px; color: #9aabae; }
+
+    /* ── Typography ── */
+    .type-stack { display: flex; flex-direction: column; gap: 10px; }
+    .type-card { background: #fff; border-radius: 16px; padding: 24px 28px; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .type-label { font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: #9aabae; margin-bottom: 10px; }
+    .type-desc  { font-size: 11px; color: #9aabae; margin-top: 8px; }
+    .t-display  { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 38px; font-weight: 900; color: #171d1e; letter-spacing: -1px; line-height: 1.1; }
+    .t-headline { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800; color: #171d1e; letter-spacing: -.5px; }
+    .t-label    { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; color: #171d1e; letter-spacing: 1.5px; text-transform: uppercase; }
+    .t-body     { font-family: 'Lexend', sans-serif; font-size: 16px; font-weight: 400; color: #3d494b; line-height: 1.7; }
+    .t-caption  { font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 600; color: #6d797c; }
+
+    /* ── Border radius ── */
+    .radius-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .radius-box { background: #006876; opacity: .85; width: 56px; height: 56px; }
+    .radius-label { font-size: 11px; color: #6d797c; font-weight: 600; text-align: center; }
+    .radius-name  { font-size: 10px; color: #9aabae; text-align: center; }
+
+    /* ── Logo grid ── */
+    .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .logo-card {
+      border-radius: 20px; padding: 40px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.07);
+    }
+    .logo-card.light { background: #fff; }
+    .logo-card.dark  { background: #171d1e; }
+    .logo-card.teal  { background: linear-gradient(135deg, #006876, #12b0c5); }
+    .logo-card.pale  { background: #f5fafc; border: 1px solid #dee3e5; }
+    .logo-card img   { width: 96px; height: 96px; object-fit: contain; }
+    .logo-label { font-size: 10px; font-weight: 700; color: #9aabae; letter-spacing: 1.2px; text-transform: uppercase; }
+    .logo-card.dark .logo-label, .logo-card.teal .logo-label { color: rgba(255,255,255,0.45); }
+
+    /* ── Icon sizes ── */
+    .icon-row { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
+    .icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .icon-item img { image-rendering: pixelated; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+    .icon-item .icon-label { font-size: 10px; color: #9aabae; font-weight: 600; }
+    .icon-bg { background: #fff; padding: 8px; border-radius: 14px; display: inline-block; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+
+    /* ── Asset table ── */
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+    th { background: #006876; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 13px 18px; text-align: left; }
+    td { padding: 12px 18px; font-size: 13px; color: #3d494b; border-bottom: 1px solid #f0f4f5; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { font-weight: 600; color: #171d1e; font-family: monospace; font-size: 12px; }
+    code { font-family: monospace; background: #f0f4f5; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+
+    /* ── Tagline ── */
+    .tagline-box { background: #fff; border-radius: 18px; padding: 36px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,.07); }
+    .tagline-main { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 900; color: #006876; letter-spacing: -.5px; }
+    .tagline-sub  { font-size: 13px; color: #9aabae; margin-top: 8px; }
+    .tagline-alts { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .tagline-alts span { background: #f5fafc; border: 1px solid #dee3e5; border-radius: 99px; padding: 6px 18px; font-size: 13px; color: #3d494b; }
+
+    /* ── Voice pillars ── */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .pillar { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .pillar-emoji { font-size: 26px; margin-bottom: 10px; }
+    .pillar-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; color: #171d1e; }
+    .pillar-desc  { font-size: 12px; color: #6d797c; margin-top: 6px; line-height: 1.5; }
+
+    /* ── Do / Don't ── */
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .do-card, .dont-card { border-radius: 16px; padding: 24px 28px; background: #fff; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .do-card { border-left: 4px solid #2e7d32; }
+    .dont-card { border-left: 4px solid #b00020; }
+    .do-card h3   { color: #2e7d32; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .dont-card h3 { color: #b00020; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .do-card li, .dont-card li { font-size: 13px; color: #3d494b; margin-bottom: 7px; margin-left: 16px; line-height: 1.5; }
+
+    /* ── Semantic ── */
+    .semantic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+    /* ── Features ── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .feature-card {
+      background: #fff; border-radius: 20px; padding: 28px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.07);
+      border-top: 3px solid transparent;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #006876, #12b0c5);
+    }
+    .feature-icon { font-size: 30px; margin-bottom: 12px; }
+    .feature-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; color: #171d1e; margin-bottom: 8px; }
+    .feature-desc  { font-size: 13px; color: #6d797c; line-height: 1.6; }
+    .feature-badge { display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: #f0fafc; color: #006876; border-radius: 20px; padding: 4px 10px; }
+    .feature-differentiator {
+      background: linear-gradient(135deg, #006876, #12b0c5);
+      border-radius: 20px; padding: 32px 36px; margin-top: 14px;
+      display: flex; align-items: center; gap: 24px;
+      box-shadow: 0 4px 20px rgba(0,104,118,0.2);
+    }
+    .feature-differentiator .diff-icon { font-size: 40px; flex-shrink: 0; }
+    .feature-differentiator .diff-text h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px; color: #fff; margin-bottom: 8px; }
+    .feature-differentiator .diff-text p  { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; margin: 0; }
+
+    /* ── Footer ── */
+    .brand-footer { text-align: center; margin-top: 60px; font-size: 12px; color: #9aabae; }
+    .brand-footer strong { color: #006876; font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── COVER ── -->
+  <div class="cover">
+    <img src="SmartKartoffel_Logo.png" alt="SmartKartoffel Logo">
+    <div class="cover-text">
+      <h1>SmartKartoffel</h1>
+      <p>Brand Identity Guidelines</p>
+      <div class="pill">Version 1.0 · 2026</div>
+    </div>
+  </div>
+
+  <!-- ── TAGLINE ── -->
+  <div class="section">
+    <div class="section-title">Tagline</div>
+    <div class="tagline-box">
+      <div class="tagline-main">Learn German. Actually remember it.</div>
+      <div class="tagline-sub">Primary tagline — hero sections, app store listings, social bios</div>
+      <div class="tagline-alts">
+        <span>German made simple.</span>
+        <span>Your German tutor, always in your pocket.</span>
+        <span>Real corrections. Real confidence.</span>
+        <span>Deutsch lernen — the smarter way.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRIMARY PALETTE ── -->
+  <div class="section">
+    <div class="section-title">Primary Palette</div>
+    <div class="palette">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#006876;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary</div>
+          <div class="swatch-hex">#006876</div>
+          <div class="swatch-role">Inky, expressive. Main brand color.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#12b0c5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Container</div>
+          <div class="swatch-hex">#12b0c5</div>
+          <div class="swatch-role">Gradient end, buttons, primary UI.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#7fd4df;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Fixed</div>
+          <div class="swatch-hex">#7fd4df</div>
+          <div class="swatch-role">Add tint, hover states.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#b8e8ed;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Fixed Dim</div>
+          <div class="swatch-hex">#b8e8ed</div>
+          <div class="swatch-role">Primary dimmy, pale fills.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECONDARY PALETTE ── -->
+  <div class="section">
+    <div class="section-title">Secondary Palette <span>— The Potato</span></div>
+    <div class="palette">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#7c5700;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Secondary</div>
+          <div class="swatch-hex">#7c5700</div>
+          <div class="swatch-role">Deep potato, strong accents.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f5cf8b;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Secondary Container</div>
+          <div class="swatch-hex">#f5cf8b</div>
+          <div class="swatch-role">Light skin container, chips.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffd966;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Secondary Fixed</div>
+          <div class="swatch-hex">#ffd966</div>
+          <div class="swatch-role">Light potato tone.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#e8b96e;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Secondary Fixed Dim</div>
+          <div class="swatch-hex">#e8b96e</div>
+          <div class="swatch-role">Subtle potato fill.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TERTIARY PALETTE ── -->
+  <div class="section">
+    <div class="section-title">Tertiary Palette <span>— German Gold</span></div>
+    <div class="palette palette-3">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#745600;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Tertiary</div>
+          <div class="swatch-hex">#745600</div>
+          <div class="swatch-role">Premium, accent.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#b99600;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Tertiary Container</div>
+          <div class="swatch-hex">#b99600</div>
+          <div class="swatch-role">Achievements, images.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f1e38b;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Tertiary Fixed</div>
+          <div class="swatch-hex">#f1e38b</div>
+          <div class="swatch-role">Premium tint, reviews.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SURFACE HIERARCHY ── -->
+  <div class="section">
+    <div class="section-title">Surface Hierarchy</div>
+    <div class="surface-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f5fafc; border:1px solid #dee3e5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface / Background</div>
+          <div class="swatch-hex">#f5fafc</div>
+          <div class="swatch-role">App background.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffffff; border:1px solid #dee3e5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Lowest</div>
+          <div class="swatch-hex">#ffffff</div>
+          <div class="swatch-role">Cards, modals.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#eff5f6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Container Low</div>
+          <div class="swatch-hex">#eff5f6</div>
+          <div class="swatch-role">Subtle bg.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#e4ecee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Container</div>
+          <div class="swatch-hex">#e4ecee</div>
+          <div class="swatch-role">Inputs, chips.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#d0e4e5;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Container High</div>
+          <div class="swatch-hex">#d0e4e5</div>
+          <div class="swatch-role">Interactive areas.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#171d1e;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">On Surface</div>
+          <div class="swatch-hex">#171d1e</div>
+          <div class="swatch-role">Primary text.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEMANTIC COLORS ── -->
+  <div class="section">
+    <div class="section-title">Semantic Colors</div>
+    <div class="semantic-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#34c97a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Success</div>
+          <div class="swatch-hex">#34c97a</div>
+          <div class="swatch-role">Correct answer, saved.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#b00020;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Error</div>
+          <div class="swatch-hex">#b00020</div>
+          <div class="swatch-role">Errors, destructive.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#ffd9dd;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Error Container</div>
+          <div class="swatch-hex">#ffd9dd</div>
+          <div class="swatch-role">Error background.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#6a6f72;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Outline</div>
+          <div class="swatch-hex">#6a6f72</div>
+          <div class="swatch-role">Borders, dividers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SIGNATURE GRADIENTS ── -->
+  <div class="section">
+    <div class="section-title">Signature Gradients</div>
+    <div class="grad-list">
+      <div class="grad-card">
+        <div class="grad-preview" style="background:linear-gradient(135deg,#006876,#12b0c5);">
+          <span>Primary Gradient</span>
+        </div>
+        <div class="grad-info">
+          <div class="grad-label">Brand Gradient — Headers, AI bubbles, CTAs</div>
+          <div class="grad-code">linear-gradient(135deg, #006876, #12b0c5)</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-preview" style="background:linear-gradient(135deg,#7c5700,#e8b96e);">
+          <span>Secondary Gradient</span>
+        </div>
+        <div class="grad-info">
+          <div class="grad-label">Potato Gradient — Premium badges, mascot accents</div>
+          <div class="grad-code">linear-gradient(135deg, #7c5700, #e8b96e)</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-preview" style="background:linear-gradient(180deg,#004e59,#006876,#12b0c5);">
+          <span>Celebration Gradient</span>
+        </div>
+        <div class="grad-info">
+          <div class="grad-label">Pro / Celebration — Paywall, streak milestones</div>
+          <div class="grad-code">linear-gradient(180deg, #004e59, #006876, #12b0c5)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <div class="section">
+    <div class="section-title">Typography</div>
+    <div class="type-stack">
+      <div class="type-card">
+        <div class="type-label">Display — Plus Jakarta Sans 900</div>
+        <div class="t-display">Hallo, ich lerne Deutsch!</div>
+        <div class="type-desc">Used for: Headlines, app name, hero text</div>
+      </div>
+      <div class="type-card">
+        <div class="type-label">Headline — Plus Jakarta Sans 800</div>
+        <div class="t-headline">Dein Deutsch wird besser</div>
+        <div class="type-desc">Used for: Section titles, tab headers, card titles</div>
+      </div>
+      <div class="type-card">
+        <div class="type-label">Label — Plus Jakarta Sans 700 Caps</div>
+        <div class="t-label">Section labels, tab names, badges</div>
+        <div class="type-desc">Used for: Section labels, tab names, badges</div>
+      </div>
+      <div class="type-card">
+        <div class="type-label">Body — Lexend 400</div>
+        <div class="t-body">Designed to reduce visual stress and improve reading speed. Perfect for chat bubbles, explanations, and long-form content.</div>
+        <div class="type-desc">Used for: All body text, chat messages, descriptions</div>
+      </div>
+      <div class="type-card">
+        <div class="type-label">Caption — Lexend 600</div>
+        <div class="t-caption">Timestamps, metadata, helper text, subtle labels</div>
+        <div class="type-desc">Used for: Timestamps, helper text, subtitle labels</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BORDER RADIUS ── -->
+  <div class="section">
+    <div class="section-title">Border Radius</div>
+    <div class="radius-row">
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:4px;"></div>
+        <div class="radius-label">4px</div>
+        <div class="radius-name">Tiny</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:8px;"></div>
+        <div class="radius-label">8px</div>
+        <div class="radius-name">Small</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:14px;"></div>
+        <div class="radius-label">14px</div>
+        <div class="radius-name">Mid</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:20px;"></div>
+        <div class="radius-label">20px</div>
+        <div class="radius-name">Card</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:32px;"></div>
+        <div class="radius-label">32px</div>
+        <div class="radius-name">Large</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:999px; width:80px; height:56px;"></div>
+        <div class="radius-label">∞</div>
+        <div class="radius-name">Pill / Button</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LOGO SHOWCASE ── -->
+  <div class="section">
+    <div class="section-title">Logo</div>
+    <div class="logo-grid">
+      <div class="logo-card light">
+        <img src="SmartKartoffel_Logo.png" alt="On white">
+        <div class="logo-label">On White</div>
+      </div>
+      <div class="logo-card pale">
+        <img src="SmartKartoffel_nobg.png" alt="Transparent">
+        <div class="logo-label">Transparent (no-bg)</div>
+      </div>
+      <div class="logo-card teal">
+        <img src="SmartKartoffel_nobg.png" alt="On brand gradient">
+        <div class="logo-label">On Brand Gradient</div>
+      </div>
+      <div class="logo-card dark">
+        <img src="SmartKartoffel_nobg.png" alt="On dark">
+        <div class="logo-label">On Dark</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ICON SIZES ── -->
+  <div class="section">
+    <div class="section-title">Icon Sizes</div>
+    <div class="icon-row">
+      <div class="icon-item">
+        <div class="icon-bg"><img src="favicon-16.png" width="16" height="16" alt="16px"></div>
+        <div class="icon-label">16px</div>
+        <div class="icon-label">favicon</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-bg"><img src="favicon-32.png" width="32" height="32" alt="32px"></div>
+        <div class="icon-label">32px</div>
+        <div class="icon-label">favicon HiDPI</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-bg"><img src="icon-192.png" width="64" height="64" alt="192px"></div>
+        <div class="icon-label">192px</div>
+        <div class="icon-label">PWA manifest</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-bg"><img src="icon-512.png" width="96" height="96" alt="512px"></div>
+        <div class="icon-label">512px</div>
+        <div class="icon-label">PWA splash</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ASSET SPECS ── -->
+  <div class="section">
+    <div class="section-title">Asset Specs</div>
+    <table>
+      <thead>
+        <tr><th>File</th><th>Size</th><th>Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SmartKartoffel_Logo.png</td><td>1024 × 1024 · 389 KB</td><td>Master logo — teal background. Use for app icons, nav, UI.</td></tr>
+        <tr><td>SmartKartoffel_nobg.png</td><td>2000 × 2000 · 1.3 MB</td><td>Transparent mascot — overlays, hero animation, dark/colored backgrounds</td></tr>
+        <tr><td>favicon-16.png</td><td>16 × 16 · 767 B</td><td>Browser tab favicon (small screens)</td></tr>
+        <tr><td>favicon-32.png</td><td>32 × 32 · 2 KB</td><td>Browser tab favicon HiDPI</td></tr>
+        <tr><td>icon-192.png</td><td>192 × 192 · 41 KB</td><td>PWA manifest icon — Android home screen, install prompt</td></tr>
+        <tr><td>icon-512.png</td><td>512 × 512 · 153 KB</td><td>PWA splash screen, app store listing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── VOICE & TONE ── -->
+  <div class="section">
+    <div class="section-title">Voice &amp; Tone</div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-emoji">🎓</div>
+        <div class="pillar-title">Smart but Chill</div>
+        <div class="pillar-desc">Knowledgeable, never condescending. Explains grammar like a friend who happens to be a teacher.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-emoji">💬</div>
+        <div class="pillar-title">Clear &amp; Short</div>
+        <div class="pillar-desc">No jargon. Simple sentences. If a 5th grader understands it, it's good copy.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-emoji">🥔</div>
+        <div class="pillar-title">Warm Personality</div>
+        <div class="pillar-desc">The potato mascot isn't random — it's charming and humble. Don't be corporate. Be fun.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DO / DON'T ── -->
+  <div class="section">
+    <div class="section-title">Do's &amp; Don'ts</div>
+    <div class="do-dont">
+      <div class="do-card">
+        <h3>Do</h3>
+        <ul>
+          <li>Use tonal depth — surface layers over shadows</li>
+          <li>Use pill shapes (border-radius: 999px) for buttons</li>
+          <li>Use #171d1e instead of pure black for text</li>
+          <li>Use the brand gradient for hero elements</li>
+          <li>Keep breathing room — generous padding</li>
+          <li>Use the potato mascot in marketing</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <h3>Don't</h3>
+        <ul>
+          <li>Use 1px solid borders to divide sections</li>
+          <li>Use pure black (#000000) anywhere</li>
+          <li>Stack more than 3 surface container levels</li>
+          <li>Use German flag colors as primary UI elements</li>
+          <li>Use sharp corners — always round</li>
+          <li>Mention "AI" in any marketing copy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KEY FEATURES ── -->
+  <div class="section">
+    <div class="section-title">Key Features</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">Multi-Language Explanations</div>
+        <div class="feature-desc">Explains German in the user's native language — not just English. Supports 30+ languages. No other app does this properly.</div>
+        <div class="feature-badge">Core Differentiator</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <div class="feature-title">WHY Explanations</div>
+        <div class="feature-desc">Doesn't just correct mistakes — explains the grammar rule behind every correction. "Der/Die/Das" with the actual reason why.</div>
+        <div class="feature-badge">Core Differentiator</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Camera Word Lookup</div>
+        <div class="feature-desc">Point the camera at any German word — street signs, menus, packaging — and get an instant full breakdown with translation.</div>
+        <div class="feature-badge">Unique Feature</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <div class="feature-title">Voice Input</div>
+        <div class="feature-desc">Speak German out loud, get corrected. Practice the way real life works — not just typing. Great for pronunciation confidence.</div>
+        <div class="feature-badge">Pro Feature</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <div class="feature-title">Personal Dictionary</div>
+        <div class="feature-desc">Save any word or sentence with one tap. Builds a personal German vocabulary list over time — words, articles, plurals, examples.</div>
+        <div class="feature-badge">All Plans</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛠️</div>
+        <div class="feature-title">AI Corrections</div>
+        <div class="feature-desc">Type broken German, get the corrected sentence + a clear explanation. Word order, grammar, gender — all covered.</div>
+        <div class="feature-badge">All Plans</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎤</div>
+        <div class="feature-title">Rate My Deutsch</div>
+        <div class="feature-desc">Read a German paragraph built from your saved words out loud. AI grades pronunciation A–F, highlights mispronounced words in red, and lets you tap any mistake to hear it spoken correctly in native German.</div>
+        <div class="feature-badge">Pro Feature</div>
+      </div>
+    </div>
+    <!-- Key differentiator callout -->
+    <div class="feature-differentiator">
+      <div class="diff-icon">⚡</div>
+      <div class="diff-text">
+        <h3>The Biggest Differentiator</h3>
+        <p>Multi-language + WHY explanations together. Most apps correct you. SmartKartoffel explains you — in your own language. That's why users stay.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="brand-footer">
+    <strong>SmartKartoffel</strong> Brand Identity · Version 1.0 · 2026
+  </div>
+
+</div>
+</body>
+</html>

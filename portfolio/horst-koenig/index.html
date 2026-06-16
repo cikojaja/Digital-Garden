@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html class="scroll-smooth light" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Malerfachbetrieb Horst König | Premium Malerarbeiten Hamburg</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#00346d",
+          "primary-container": "#1e4b8a",
+          "primary-fixed": "#d7e3ff",
+          "primary-fixed-dim": "#aac7ff",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#001b3e",
+          "on-primary-fixed-variant": "#174685",
+          "on-primary-container": "#99bdff",
+          "secondary": "#b51a1e",
+          "secondary-container": "#d93633",
+          "secondary-fixed": "#ffdad6",
+          "secondary-fixed-dim": "#ffb4ac",
+          "on-secondary": "#ffffff",
+          "on-secondary-fixed": "#410003",
+          "on-secondary-fixed-variant": "#93000e",
+          "on-secondary-container": "#fffbff",
+          "tertiary": "#453200",
+          "tertiary-container": "#624700",
+          "tertiary-fixed": "#ffdfa0",
+          "tertiary-fixed-dim": "#f8bd2a",
+          "on-tertiary": "#ffffff",
+          "on-tertiary-fixed": "#261a00",
+          "on-tertiary-fixed-variant": "#5c4300",
+          "on-tertiary-container": "#ecb31d",
+          "surface": "#fcf9f8",
+          "surface-bright": "#fcf9f8",
+          "surface-dim": "#dcd9d9",
+          "surface-container": "#f0eded",
+          "surface-container-low": "#f6f3f2",
+          "surface-container-high": "#eae7e7",
+          "surface-container-highest": "#e4e2e1",
+          "surface-container-lowest": "#ffffff",
+          "surface-variant": "#e4e2e1",
+          "surface-tint": "#355e9e",
+          "on-surface": "#1b1c1c",
+          "on-surface-variant": "#434750",
+          "on-background": "#1b1c1c",
+          "background": "#fcf9f8",
+          "outline": "#737781",
+          "outline-variant": "#c3c6d2",
+          "inverse-surface": "#303030",
+          "inverse-on-surface": "#f3f0f0",
+          "inverse-primary": "#aac7ff",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+        },
+        borderRadius: {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        fontFamily: {
+          "headline": ["Noto Serif", "serif"],
+          "body": ["Manrope", "sans-serif"],
+          "label": ["Manrope", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+
+<!-- ═══════════ PRELOADER ═══════════ -->
+<div id="preloader">
+  <div class="preloader-content">
+    <div class="preloader-logo">Malerfachbetrieb <span>König</span></div>
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  </div>
+</div>
+
+<!-- ═══════════ CURSOR ═══════════ -->
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<!-- ═══════════ FLOATING BLOBS ═══════════ -->
+<div class="blob blob-blue"></div>
+<div class="blob blob-red"></div>
+<div class="blob blob-yellow"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo scroll-link">
+      Malerfachbetrieb <span>König</span>
+    </a>
+    <div class="nav-links">
+      <a href="#leistungen" class="nav-link scroll-link">Leistungen</a>
+      <a href="#referenzen" class="nav-link scroll-link">Referenzen</a>
+      <a href="#ueber-uns" class="nav-link scroll-link">Über uns</a>
+      <a href="#regionen" class="nav-link scroll-link">Regionen</a>
+      <a href="#kontakt" class="nav-link scroll-link">Kontakt</a>
+    </div>
+    <a href="tel:+4940587101" class="btn-primary nav-cta">Jetzt Anrufen</a>
+    <button id="menu-toggle" class="menu-toggle md:hidden">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <a href="#leistungen" class="mob-link scroll-link">Leistungen</a>
+  <a href="#referenzen" class="mob-link scroll-link">Referenzen</a>
+  <a href="#ueber-uns" class="mob-link scroll-link">Über uns</a>
+  <a href="#regionen" class="mob-link scroll-link">Regionen</a>
+  <a href="#kontakt" class="mob-link scroll-link">Kontakt</a>
+</div>
+
+<main>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero" class="hero-section relative px-8 py-20 lg:py-40 max-w-screen-2xl mx-auto">
+  <div class="grid lg:grid-cols-2 items-center gap-16">
+
+    <div class="z-10">
+      <span class="badge-pill reveal-up">Meisterbetrieb Hamburg</span>
+      <h1 class="hero-title reveal-up" data-delay="100">
+        Ihre Vision,<br/>
+        <span class="text-secondary italic font-normal">unser Handwerk.</span>
+      </h1>
+      <p class="hero-sub reveal-up" data-delay="200">
+        Premium-Malerarbeiten seit über 45 Jahren. Wir bringen
+        <span class="text-primary font-bold">Farbe</span> und
+        <span class="text-tertiary font-bold">Leben</span> in Ihr hanseatisches Zuhause.
+      </p>
+      <div class="hero-buttons reveal-up" data-delay="300">
+        <a href="#kontakt" class="btn-primary scroll-link">Beratung vereinbaren</a>
+        <a href="#referenzen" class="btn-outline scroll-link">Unsere Referenzen</a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap reveal-right">
+      <div class="hero-img-card">
+        <img alt="Premium Hamburg Interior" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuClcX2xNqWcI9guXFoiSLUonh64lnVNxxZJx4GyfErQuwFnutkArkCUwiCi-H8S8Ml5fleSXXYvNYY0WfLGg-SehldaHtFi9bT4SzD74Y-gepFV3o0QXmwZtSBI8GkdHe7kON7UhbreilSXzju2ldNNKAOyY1UdVBzKH424GW538yqhkYrJfAB356BksKDQNB_19gtViUhKMP9VyZ2AnRHNWjIS5j0UxYEhGxK25hKmgMk8pzPYKOJHaHBgWMoLui81yXhLR7RlKwk"/>
+      </div>
+      <div class="hero-badge-yellow"></div>
+      <div class="hero-badge-red"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">45+</span>
+        <span class="hero-stat-label">Jahre Hamburger Tradition</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ COLOR SWATCH STRIP ═══════════ -->
+<div class="swatch-strip">
+  <div class="swatch bg-primary"></div>
+  <div class="swatch bg-secondary"></div>
+  <div class="swatch bg-tertiary-fixed-dim"></div>
+  <div class="swatch bg-primary-container"></div>
+  <div class="swatch bg-secondary-container"></div>
+</div>
+
+<!-- ═══════════ LEISTUNGEN ═══════════ -->
+<section id="leistungen" class="py-32 relative overflow-hidden">
+  <div class="section-bg-slant"></div>
+  <div class="max-w-screen-2xl mx-auto px-8">
+
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8 reveal-up">
+      <div class="max-w-3xl">
+        <span class="section-eyebrow">Exzellenz im Handwerk</span>
+        <h2 class="section-title">Meisterhafte Leistungen</h2>
+        <p class="section-sub mt-6">Von klassischen Anstrichen bis zu exklusiven Bodenbelägen – wir kombinieren traditionelle Hamburger Handwerkskunst mit modernsten Design-Trends.</p>
+      </div>
+      <div class="service-icon-circle">
+        <span class="material-symbols-outlined text-white text-5xl">brush</span>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-12">
+
+      <!-- Blaue Karte -->
+      <div class="service-card service-card-blue reveal-up" data-delay="0">
+        <div class="service-card-corner"></div>
+        <div>
+          <div class="service-icon-box service-icon-box-blue">
+            <span class="material-symbols-outlined text-4xl">format_paint</span>
+          </div>
+          <h3 class="service-card-title">Maler- & Tapezierarbeiten</h3>
+          <p class="service-card-body">Präzise Wandgestaltung mit erstklassigen Farben und Luxus-Tapeten für charaktervolle Wohnräume.</p>
+        </div>
+        <a href="#maler" class="service-card-link scroll-link">
+          Details ansehen <span class="material-symbols-outlined text-3xl">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Rote Karte -->
+      <div class="service-card service-card-red reveal-up lg:translate-y-12" data-delay="100">
+        <div class="service-card-corner-alt"></div>
+        <div>
+          <div class="service-icon-box service-icon-box-red">
+            <span class="material-symbols-outlined text-4xl">texture</span>
+          </div>
+          <h3 class="service-card-title">Exklusive Bodenbeläge</h3>
+          <p class="service-card-body">Hochwertige textile Verlegung für Wärme, Komfort und eine unvergleichliche Raumakustik.</p>
+        </div>
+        <a href="#boden" class="service-card-link scroll-link">
+          Details ansehen <span class="material-symbols-outlined text-3xl">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Gelbe Karte -->
+      <div class="service-card service-card-yellow reveal-up" data-delay="200">
+        <div class="service-card-glow"></div>
+        <div>
+          <div class="service-icon-box service-icon-box-yellow">
+            <span class="material-symbols-outlined text-4xl">home_work</span>
+          </div>
+          <h3 class="service-card-title">Fassaden-Veredelung</h3>
+          <p class="service-card-body">Ästhetischer Wetterschutz und Werterhalt für Hamburgs schönste Architektur.</p>
+        </div>
+        <a href="#fassade" class="service-card-link-dark scroll-link">
+          Details ansehen <span class="material-symbols-outlined text-3xl">arrow_forward</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LEISTUNGEN DETAIL ═══════════ -->
+
+<!-- Maler- und Tapezierarbeiten -->
+<section id="maler" class="relative py-24 md:py-32 bg-primary text-white slant-section z-20">
+  <div class="absolute top-0 right-0 opacity-10 pointer-events-none">
+    <span class="material-symbols-outlined" style="font-size:15rem;">brush</span>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 relative">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 order-2 md:order-1 reveal-left">
+        <div class="relative group">
+          <div class="absolute -inset-4 border-2 border-white/20 rounded-3xl transition-all duration-500 group-hover:scale-105"></div>
+          <img alt="Maler- und Tapezierarbeiten" class="relative rounded-2xl shadow-2xl z-10 w-full"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXuBDg31XtC-Xo_LeZ4dFQ7opoq8FBRfpWZojgurPUJB3yQZsopZZAxyYxwgRiHvUdczN-J5rvOeUvHJrx39ynzl_qakiof2QWPQw8mPBL3iUs129qRPXXRIrQvLCBrchbPXhdxjwdcEHVoLVByYvuTfGi79AZ7Yh-Xgk15HZ7gbySNvN-g0UYoDT6r0eW-F9Ny75qp7JmAUD8qw0HiJCfD_wlQkce4uzinaV8vEEJS_fYploZWv_myLZkrT4Dpg-97KsFQsls9uQ"/>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 order-1 md:order-2 reveal-right">
+        <div class="detail-eyebrow text-primary-fixed-dim">
+          <span class="w-12 h-[2px] bg-primary-fixed-dim inline-block"></span>
+          <span>Meisterklasse</span>
+        </div>
+        <h2 class="detail-title">Maler- und<br/>Tapezierarbeiten</h2>
+        <p class="text-primary-fixed-dim text-lg leading-relaxed mb-8">Jeder Pinselstrich ist eine Entscheidung für Exzellenz. Wir verarbeiten ausschließlich Pigmente höchster Güte und exklusive Tapetenkollektionen internationaler Manufakturen.</p>
+        <ul class="grid grid-cols-2 gap-4">
+          <li class="detail-feature-item"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span> Mineralfarben</li>
+          <li class="detail-feature-item"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span> Designtapeten</li>
+          <li class="detail-feature-item"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span> Spachteltechniken</li>
+          <li class="detail-feature-item"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span> Farbberatung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bodenbeläge -->
+<section id="boden" class="relative py-24 md:py-32 bg-secondary text-white slant-section-rev z-10">
+  <div class="max-w-7xl mx-auto px-8 relative">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 reveal-left">
+        <div class="detail-eyebrow text-secondary-fixed">
+          <span class="w-12 h-[2px] bg-secondary-fixed inline-block"></span>
+          <span>Haptik & Komfort</span>
+        </div>
+        <h2 class="detail-title">Textile<br/>Fussboden-Verlegung</h2>
+        <p class="text-secondary-fixed text-lg leading-relaxed mb-8">Böden sind das Fundament Ihrer Wohnatmosphäre. Unsere Auswahl an edlen Teppichböden und Textilbelägen vereint luxuriöse Optik mit höchster Strapazierfähigkeit.</p>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="detail-card bg-white text-secondary">
+            <h4 class="font-bold mb-1">Schurwolle</h4>
+            <p class="text-sm opacity-80">Natürliche Eleganz und bestes Raumklima.</p>
+          </div>
+          <div class="detail-card bg-white text-secondary">
+            <h4 class="font-bold mb-1">Objekt-Teppich</h4>
+            <p class="text-sm opacity-80">Höchste Belastbarkeit für repräsentative Räume.</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 reveal-right">
+        <div class="aspect-square bg-white/10 rounded-full overflow-hidden border-4 border-white/20 group hover:rounded-3xl transition-all duration-500">
+          <img alt="Textile Bodenbeläge" class="object-cover w-full h-full group-hover:scale-95 transition-transform duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDti_3e9Nk8tMRkbjBMGuy0wrj8-vp3Jn3LgRjCDEhqdx8yo6Joy1Umm7c23_l3g2w8C7msYiE8zPXvY7fUvG9KYqz3Svmgn-G-vftmnTEGpBo05mTZ7KJ5HqFi4_LMDcfmQGOi1pbkAkszyr0TXZW4rtnmYnkpUxl-dQGynG9D_92FaRHWMaTHKLY7psvCEn1wVVvLOYwf_T5Bmc4inH91cKXFfbw_k9dtorXJ_h6HJ0IhmoX8G-lvuzLnSHVrmP4986u7_Rlh9Uw"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fassadenbeschichtung -->
+<section id="fassade" class="relative py-24 md:py-32 bg-tertiary-fixed text-on-tertiary-fixed slant-section z-0">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <div class="w-full md:w-1/2 order-2 md:order-1 reveal-left">
+        <div class="grid grid-cols-2 gap-4 relative">
+          <div class="absolute inset-0 bg-white/30 blur-3xl rounded-full"></div>
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden mt-12 relative z-10 shadow-xl border-4 border-white">
+            <img alt="Fassade Hamburg" class="object-cover w-full h-full"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeqm5vLDgpq6lucgFQrJ9i04BkHNz3P4sSVh7Ml2L98N-dSKCdxQoicZr579BzZZbxg0F9ukH-JO1laAKeogARO68u8S50JnW8bZqdnsFLmL-yH6wLd51VJ6qYsCdJELl0CdasGTf1RmG9o1Ki54Pdp6967Je-zHQvhVR6xp3j7TRZVNRaHtmuIHpP0OX-yM45FmOtaQwuVWbiBD1F0BoFJkkxs9W97PV8NXshRGXqfqqUYrBfcKncKjxszg4MNJ7ns1onspAZQp4"/>
+          </div>
+          <div class="aspect-[3/4] rounded-2xl overflow-hidden relative z-10 shadow-xl border-4 border-white">
+            <img alt="Fassadenputz" class="object-cover w-full h-full"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjmDvX22oX54Wt8EV8gcHKNwBANX23BidRb4zTpZMvAiwLN1jlGbZNlz51e4A6bqBvM1b1Ws-0KeJtiSaaNRE9bEU0bXICQfyZXFwIoQsfttclKEVN83AnDYZiexosDNnn1bchkh3OrADib-TE8BZt-wGcEJ0F4mP7A8a8Yx_WOLVJI2W87Yqc35tW_t5-Zem0jPjD-oM4obednT0W5TvS_3liuFYwudFk88QFhAZoDK3FfOoIffBjEp-twXpvDte7t9igmlrUfrk"/>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 order-1 md:order-2 reveal-right">
+        <div class="detail-eyebrow text-tertiary">
+          <span class="w-12 h-[2px] bg-tertiary inline-block"></span>
+          <span>Werterhalt</span>
+        </div>
+        <h2 class="detail-title">Fassaden-<br/>beschichtung</h2>
+        <p class="text-on-tertiary-fixed-variant text-lg leading-relaxed mb-8">Schutz trifft auf Ästhetik. Eine Fassade ist die Visitenkarte Ihres Hauses. Wir kombinieren modernste Beschichtungstechnologien mit handwerklichem Feingefühl.</p>
+        <div class="flex flex-wrap gap-4">
+          <span class="tag-pill">Witterungsschutz</span>
+          <span class="tag-pill">Algenschutz</span>
+          <span class="tag-pill">Farbberatung</span>
+          <span class="tag-pill">Denkmalschutz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ÜBER UNS ═══════════ -->
+<section id="ueber-uns" class="py-40 px-8 max-w-screen-2xl mx-auto">
+  <div class="grid lg:grid-cols-12 gap-20 items-center">
+
+    <div class="lg:col-span-5 order-2 lg:order-1 relative reveal-left">
+      <div class="absolute -inset-6 bg-primary rounded-[3rem] -z-10 rotate-2"></div>
+      <div class="absolute -inset-6 bg-tertiary-fixed rounded-[3rem] -z-20 -rotate-3 translate-x-4 translate-y-4"></div>
+      <img alt="Malerfachbetrieb König Team" class="rounded-[2.5rem] shadow-2xl w-full h-[600px] object-cover border-4 border-white"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgTBwIdzSdv3ldTPzER7qLBxJTfLHuRC79oQDB3vZXGd0Ufo4fyWsPOrgv00Eh_knHEckfJd3f2F4mIOaYZGOwInqru_CNjr-BI5okZuOwWJHBg86MJ1-hI2pCBHgHRuvF2ficHf48hs-BcKXUr1rTmNtprM6Soddj1JUBmOL8fepS1ja3VYOK_oL9N6c-_4qvDswABRW_jDsKgRl2IpuyxqpgTprUX-ehJOloQJxTd10ykPGXCTWKC2NwrU3WuCmsQLHLHWFAcyU"/>
+    </div>
+
+    <div class="lg:col-span-7 order-1 lg:order-2 reveal-right">
+      <h2 class="font-headline text-5xl lg:text-7xl font-bold mb-12 leading-tight">
+        Tradition trifft<br/><span class="text-primary">Farbexpertise.</span>
+      </h2>
+      <p class="text-xl text-on-surface-variant leading-relaxed mb-10 font-medium">
+        Der <span class="text-primary font-bold">Malerfachbetrieb Horst König</span> ist eine Hamburger Institution. Seit 1979 stehen wir für absolute Verlässlichkeit, meisterliche Ausführung und eine persönliche Beratung, die Ihre Wünsche ins Zentrum rückt.
+      </p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="about-card about-card-blue">
+          <h4 class="font-black text-xl mb-2">Hanseatische Qualität</h4>
+          <p class="text-sm font-medium opacity-80">Meisterbrief, Premium-Farben und eine Ausführung ohne Kompromisse.</p>
+        </div>
+        <div class="about-card about-card-red">
+          <h4 class="font-black text-xl mb-2">Maximale Flexibilität</h4>
+          <p class="text-sm font-medium opacity-80">Wir arbeiten nach Ihrem Zeitplan – sauber, schnell und diskret.</p>
+        </div>
+        <div class="about-card about-card-tertiary">
+          <h4 class="font-black text-xl mb-2">Echte Zuverlässigkeit</h4>
+          <p class="text-sm font-medium opacity-80">Handschlagqualität. Von der ersten Skizze bis zur finalen Abnahme.</p>
+        </div>
+        <div class="about-card about-card-container">
+          <h4 class="font-black text-xl mb-2">Inspiration & Stil</h4>
+          <p class="text-sm font-medium opacity-80">Wir beraten Sie stilsicher bei der Auswahl Ihrer perfekten Farbwelt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ REFERENZEN ═══════════ -->
+<section id="referenzen" class="py-24 bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-8">
+
+    <div class="flex flex-col md:flex-row items-end gap-8 mb-16 reveal-up">
+      <div class="md:w-2/3">
+        <span class="section-eyebrow">Portfolio</span>
+        <h2 class="section-title">Lassen Sie sich inspirieren</h2>
+        <p class="section-sub mt-4">Hanseatische Handwerkskunst trifft auf moderne Ästhetik. Entdecken Sie unsere Auswahl exklusiver Projekte.</p>
+      </div>
+      <div class="w-20 h-20 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container animate-bounce shadow-xl">
+        <span class="material-symbols-outlined text-4xl">brush</span>
+      </div>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap gap-4 mb-16 reveal-up">
+      <button class="filter-btn filter-btn-active" data-filter="all">Alle Projekte</button>
+      <button class="filter-btn filter-btn-secondary" data-filter="maler">Malerarbeiten</button>
+      <button class="filter-btn filter-btn-tertiary" data-filter="boden">Bodenbeläge</button>
+      <button class="filter-btn filter-btn-outline" data-filter="fassade">Fassaden</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+
+      <!-- Large Feature -->
+      <div class="md:col-span-8 gallery-item reveal-up" data-delay="0">
+        <div class="gallery-img-wrap rounded-tl-[4rem] rounded-br-xl aspect-[16/9]">
+          <img class="w-full h-full object-cover" alt="Penthouse Harvestehude"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ3Sslp17hMKya8e3syUPQ7Wlf8GuEdNg91OsfCcQTyXfLk85OmfmKs_QYHXc0PrzAXOUuhEkUdQfjKY5QanlBGV6WgsE6bwXnX8wGW0bQP9bQQnq7UgU4lfYrGUrRvCeUAKBmEyHL7vSO7SwVVxpX58uleoVPmaQ963tb7Xv5rKuf3XChX7zs98K9T0vIG3_ig1tgc_ny8QXdw2uebNBKUe5EwrsSpVZm_eC60dg5cU5JdhUmoLzDDdx1L0ChqGqo9LOFcuRiO0s"/>
+          <div class="gallery-overlay gallery-overlay-blue">
+            <span class="gallery-tag">MALERARBEITEN</span>
+            <h3 class="gallery-caption-lg">Penthouse Harvestehude</h3>
+            <div class="gallery-line"></div>
+          </div>
+        </div>
+        <h3 class="text-3xl font-headline mt-6 group-hover:text-primary transition-colors">Penthouse Harvestehude</h3>
+        <p class="text-on-surface-variant mt-2 leading-relaxed">Präzisionsanstrich in mattem Alster-Weiß und exklusive Spachteltechniken für ein fließendes Raumgefühl.</p>
+      </div>
+
+      <!-- Side Tall -->
+      <div class="md:col-span-4 gallery-item md:mt-24 reveal-up" data-delay="100">
+        <div class="gallery-img-wrap rounded-tr-[3rem] rounded-bl-xl aspect-[3/4]">
+          <img class="w-full h-full object-cover" alt="Villa Blankenese"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxoPtMU_Ecl3rO97VN0a66fWGiwV6kuCKOJQPm-0UqvlxtKRVRlDIpwBODzwSSrVO43dum-Nyv1eVKhaZfHdRqXzMZs7O-vSZ7S5KyES3SA6S_E4Kgqti08cjJsiZPZn9WXmCuLMNEtJUYZCObJTnxD82QpDLNnE0uyNZ1WiZsWO0z9NuTz9CIvKxRaBpbmw4C5O2s0cG3dDTCmk3sImXsL3idaGwdP_2kpZSan2scvUPxxDGZr9i_5TKd5u1WesZ7eTlJkrjI7uc"/>
+          <div class="gallery-overlay gallery-overlay-red">
+            <span class="gallery-tag-sm">FASSADEN</span>
+            <h3 class="gallery-caption-sm">Villa Blankenese</h3>
+          </div>
+        </div>
+        <h3 class="text-xl font-headline mt-6">Historische Villa Blankenese</h3>
+        <p class="text-on-surface-variant mt-2 text-sm leading-relaxed">Denkmalschutzgerechte Fassadensanierung mit mineralischen Pigmenten.</p>
+      </div>
+
+      <!-- Three small -->
+      <div class="md:col-span-4 gallery-item reveal-up" data-delay="0">
+        <div class="gallery-img-wrap rounded-xl aspect-square">
+          <img class="w-full h-full object-cover" alt="Office HafenCity"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAazqOsweswzSIRWRWXhWXm-Ani1_Yv8-Df-dyKF_nOU7XNOfr2NQA3mLGoV7A2HJoHvhUiZrlnPrGW4yGouaNOE9rJX3JViWgobszmMzUdQyolauOw8FjukgT9t5xfAeWSrJTdbBtjwjRLAt03kOjuDqzRDNjGwi_5XCYMMZbXOmzWusZkB7vln9WRab1woigEAzEQvo4u1yWQBoXCoRjIVFuGHQZ8DfJ3KMhxfb0Y1qwFheHOxH5rQW1UGkXmRmJVBd8nOstIcVo"/>
+          <div class="gallery-overlay gallery-overlay-tertiary flex flex-col justify-center items-center text-center p-6">
+            <span class="material-symbols-outlined text-on-tertiary text-4xl mb-3">foundation</span>
+            <h3 class="text-on-tertiary text-xl font-headline">Office Loft HafenCity</h3>
+          </div>
+        </div>
+        <h3 class="text-xl font-headline mt-5">Office Loft HafenCity</h3>
+        <p class="text-on-surface-variant mt-2 text-sm">Industrieller Charme durch fugenlose Bodenbeläge und Akzentwände.</p>
+      </div>
+
+      <div class="md:col-span-4 gallery-item md:-mt-16 reveal-up" data-delay="80">
+        <div class="gallery-img-wrap rounded-xl aspect-square">
+          <img class="w-full h-full object-cover" alt="Altbau Eppendorf"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVOGPpa4fETu_Xauci1p7rlo3peGx-YoXiUZ--C2sMDIJQhVXbBd-iYlLwsiKZGgW9MmmHVy5Qez-EfHtmi93-PePtWn-asDeBCA14Fnc4ofQ6xQkhXfJRJZudO0CGrSWHoIZVs7K7gy801M5rhbiWCiiE863EWJF3lr6HP4hirpKXbwhZvl43YBxqJFnfkNKyd2q4CxtgVP5d6jnGnOm9b0cLD-yVs6J2xRsfba2U5rUb2T-2u70P3FSkNOAmH2KEE8QZ9Ymcc8c"/>
+          <div class="gallery-overlay gallery-overlay-blue flex flex-col justify-center items-center text-center p-6">
+            <span class="material-symbols-outlined text-on-primary text-4xl mb-3">auto_awesome</span>
+            <h3 class="text-on-primary text-xl font-headline">Altbau-Juwel Eppendorf</h3>
+          </div>
+        </div>
+        <h3 class="text-xl font-headline mt-5">Altbau-Juwel Eppendorf</h3>
+        <p class="text-on-surface-variant mt-2 text-sm">Prachtvolle Tapeten-Inszenierung und Aufarbeitung historischer Parkettböden.</p>
+      </div>
+
+      <div class="md:col-span-4 gallery-item reveal-up" data-delay="160">
+        <div class="gallery-img-wrap rounded-br-[4rem] rounded-tl-xl aspect-[4/5]">
+          <img class="w-full h-full object-cover" alt="Residenz Uhlenhorst"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ5nl8nDZ62QIt8J3bhBicQZDkc30Jj9cmFWyUe0dT-KVCxtdBfQERKHnipn8jfSNI4qYkpdv0hIdy8LeIxGVJqzMMrepoQDukZHNhSeND7TwNy_UibtnZE8X6m9JhY8cFdSqHP7Lx0GvsBviVdzH-6Pbj3ggwzMX4V5r9QX2RScuYKTfmwvZWGQmVjbXB_QyP9NAkMlfcjE5qjXEb_2y0d_J71gM3mTkcpIMk2_hVSvncd7_JThS2reSOXtt114Nv1NVQa4Ql6mw"/>
+          <div class="gallery-overlay gallery-overlay-red flex flex-col justify-center items-center text-center p-6">
+            <span class="material-symbols-outlined text-on-secondary text-4xl mb-3">home</span>
+            <h3 class="text-on-secondary text-xl font-headline">Residenz Uhlenhorst</h3>
+          </div>
+        </div>
+        <h3 class="text-xl font-headline mt-5">Residenz Uhlenhorst</h3>
+        <p class="text-on-surface-variant mt-2 text-sm">Harmonisches Farbkonzept in Greige-Tönen mit Fischgrät-Parkett.</p>
+      </div>
+
+      <!-- Wide Feature -->
+      <div class="md:col-span-12 gallery-item mt-8 reveal-up">
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 rounded-[3rem] overflow-hidden shadow-2xl group">
+          <div class="relative overflow-hidden h-[450px]">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Palais Elbchaussee"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCczjQdssLuxEdZSvXlaGtg7Kxzhzdc0leoiDhYm_xpgTS0h3Lfv0L9xC4qc79aNUi6kHC8Bcg82xxEbPwHnh2SyEfJPJzYVsvWosqRYQN1kL6Po_UubYyXws_maUnX57S0J0UJlLUBSmbg3B7aOo032WwQLSD7_QdRf5GzyaNrWReQl0CgZpfwQ9VqoTwwPrzyg-Umyl_RgW4NIINt49TRvD2y3Dj3kP019Y4aXeJXw3QqhrmNaQgQ93LwH73Nbf7HIrKzs91KcOU"/>
+            <div class="absolute top-8 left-8 bg-white/90 backdrop-blur px-6 py-2 rounded-full text-secondary font-bold text-xs tracking-widest uppercase shadow-lg">Meisterstück</div>
+          </div>
+          <div class="p-12 md:p-20 flex flex-col justify-center bg-white/40 backdrop-blur-sm">
+            <span class="text-secondary font-bold tracking-[0.2em] text-xs mb-4 uppercase">Exklusiv-Projekt</span>
+            <h3 class="text-4xl font-headline mb-6 leading-tight text-primary">Palais an der Elbchaussee</h3>
+            <p class="text-on-surface-variant mb-10 text-lg font-light leading-relaxed">Eine der anspruchsvollsten Sanierungen des Jahres. Über 800m² Fläche wurden mit handverlesenen Kalkmarmorputzen und Blattgold-Details veredelt.</p>
+            <a href="#kontakt" class="inline-flex items-center text-primary font-bold hover:translate-x-3 transition-transform text-lg scroll-link">
+              <span class="border-b-2 border-primary/20 hover:border-primary pb-1 transition-all">Projekt-Details ansehen</span>
+              <span class="material-symbols-outlined ml-3 bg-primary text-on-primary p-2 rounded-full text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ REGIONEN ═══════════ -->
+<section id="regionen" class="py-24 px-8">
+  <div class="max-w-screen-2xl mx-auto">
+    <div class="bg-primary text-white rounded-[4rem] p-12 lg:p-24 relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,52,109,0.3)] reveal-up">
+      <div class="region-glow region-glow-red"></div>
+      <div class="region-glow region-glow-yellow"></div>
+      <div class="relative z-10">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-12 mb-16">
+          <div class="max-w-2xl">
+            <h2 class="font-headline text-5xl lg:text-6xl font-bold mb-8">
+              Überall in Hamburg<br/><span class="text-secondary italic">für Sie vor Ort.</span>
+            </h2>
+            <p class="text-primary-fixed text-xl font-light">Ob Stadthaus, Penthouse oder Büro – wir verschönern die Hansestadt Kiez für Kiez.</p>
+          </div>
+          <div class="bg-white/20 p-8 rounded-[2rem] backdrop-blur-md border border-white/30 text-center shrink-0">
+            <span class="block text-4xl font-black mb-1">100%</span>
+            <span class="text-xs font-bold uppercase tracking-widest">Hanseatisch</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="region-chip region-chip-white">Harvestehude</div>
+          <div class="region-chip region-chip-white">Eppendorf</div>
+          <div class="region-chip region-chip-white">Winterhude</div>
+          <div class="region-chip region-chip-white">Altona</div>
+          <div class="region-chip region-chip-red">Blankenese</div>
+          <div class="region-chip region-chip-red">HafenCity</div>
+          <div class="region-chip region-chip-red">Poppenbüttel</div>
+          <div class="region-chip region-chip-red">Lokstedt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXPERTISE ═══════════ -->
+<section class="py-24 bg-surface relative">
+  <div class="paint-drip paint-drip-1"></div>
+  <div class="paint-drip paint-drip-2"></div>
+  <div class="paint-drip paint-drip-3"></div>
+  <div class="max-w-7xl mx-auto px-8 relative z-10">
+    <div class="text-center mb-20 reveal-up">
+      <h2 class="font-headline text-4xl md:text-5xl mb-6">Unsere Expertise</h2>
+      <div class="expertise-line"></div>
+      <p class="text-on-surface-variant max-w-2xl mx-auto text-lg mt-6">Warum Kunden seit Jahrzehnten auf den Malerfachbetrieb König vertrauen.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="expertise-card reveal-up" data-delay="0">
+        <div class="expertise-icon expertise-icon-blue">
+          <span class="material-symbols-outlined text-3xl">verified</span>
+        </div>
+        <h3 class="font-headline text-2xl mb-4 text-primary">Höchste Qualität</h3>
+        <p class="text-on-surface-variant leading-relaxed">Wir verwenden ausschließlich Premium-Produkte renommierter Hersteller für langlebige und brillante Ergebnisse.</p>
+      </div>
+      <div class="expertise-card reveal-up" data-delay="100">
+        <div class="expertise-icon expertise-icon-red">
+          <span class="material-symbols-outlined text-3xl">architecture</span>
+        </div>
+        <h3 class="font-headline text-2xl mb-4 text-secondary">Präzision</h3>
+        <p class="text-on-surface-variant leading-relaxed">Vom Abkleben bis zum letzten Finish – wir arbeiten mit millimetergenauer Sorgfalt für ein makelloses Gesamtbild.</p>
+      </div>
+      <div class="expertise-card reveal-up" data-delay="200">
+        <div class="expertise-icon expertise-icon-yellow">
+          <span class="material-symbols-outlined text-3xl">foundation</span>
+        </div>
+        <h3 class="font-headline text-2xl mb-4 text-tertiary">Tradition</h3>
+        <p class="text-on-surface-variant leading-relaxed">Ehrliches Handwerk, Pünktlichkeit und Zuverlässigkeit sind die Grundpfeiler unserer Unternehmensphilosophie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA DARK ═══════════ -->
+<section class="py-32 relative bg-primary overflow-hidden">
+  <div class="absolute inset-0 opacity-20">
+    <svg class="w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="400" cy="400" fill="none" r="300" stroke="white" stroke-width="2"/>
+      <circle cx="350" cy="350" fill="none" r="250" stroke="white" stroke-width="1"/>
+      <circle cx="450" cy="450" fill="none" r="350" stroke="white" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="max-w-4xl mx-auto px-8 text-center relative z-10 reveal-up">
+    <h2 class="font-headline text-4xl md:text-6xl mb-8 text-white">
+      Bereit für eine <span class="italic text-tertiary-fixed-dim">Veränderung</span>?
+    </h2>
+    <p class="text-primary-fixed-dim text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+      Lassen Sie uns gemeinsam besprechen, wie wir Ihre Vision in handwerkliche Realität umsetzen können.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <a href="#kontakt" class="btn-white scroll-link">Beratungsgespräch vereinbaren</a>
+      <a href="#referenzen" class="btn-ghost-white scroll-link">Portfolio ansehen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ KONTAKT ═══════════ -->
+<section id="kontakt" class="py-32 bg-surface-container-low px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <span class="section-eyebrow">Direkt & Unkompliziert</span>
+      <h2 class="section-title mt-2">Nehmen Sie Kontakt auf</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 reveal-up">
+      <!-- Info -->
+      <div class="space-y-8">
+        <div class="contact-info-item">
+          <div class="contact-icon bg-primary/10 text-primary"><span class="material-symbols-outlined">location_on</span></div>
+          <div>
+            <p class="font-bold text-on-surface">Adresse</p>
+            <p class="text-on-surface-variant">Lokstedter Steindamm 2<br/>22529 Hamburg</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon bg-secondary/10 text-secondary"><span class="material-symbols-outlined">call</span></div>
+          <div>
+            <p class="font-bold text-on-surface">Telefon</p>
+            <a href="tel:+4940587101" class="text-primary hover:underline">040 / 58 71 01</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon bg-tertiary/10 text-tertiary"><span class="material-symbols-outlined">schedule</span></div>
+          <div>
+            <p class="font-bold text-on-surface">Öffnungszeiten</p>
+            <p class="text-on-surface-variant">Mo–Fr: 07:00 – 17:00 Uhr<br/>Sa: nach Vereinbarung</p>
+          </div>
+        </div>
+      </div>
+      <!-- Form -->
+      <form class="space-y-6" id="contact-form">
+        <div>
+          <label class="contact-label">Ihr Name</label>
+          <input type="text" class="contact-input" placeholder="Max Mustermann"/>
+        </div>
+        <div>
+          <label class="contact-label">Telefon / E-Mail</label>
+          <input type="text" class="contact-input" placeholder="040 / ... oder name@email.de"/>
+        </div>
+        <div>
+          <label class="contact-label">Ihr Anliegen</label>
+          <textarea class="contact-input resize-none" rows="4" placeholder="Kurze Beschreibung Ihres Projekts..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center">Anfrage absenden</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="bg-zinc-950 text-white pt-28 pb-12 relative overflow-hidden">
+  <div class="footer-gradient-bar"></div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-16 px-8 max-w-screen-2xl mx-auto relative z-10">
+    <div class="space-y-6">
+      <div class="font-headline text-3xl font-bold">Malerfachbetrieb<br/><span class="text-secondary">Horst König</span></div>
+      <p class="text-zinc-400 text-lg leading-relaxed font-light">Hanseatische Perfektion in Farbe und Design. Wir schaffen Räume mit Seele und bleibendem Wert.</p>
+    </div>
+    <div>
+      <h4 class="footer-heading">Leistungen</h4>
+      <ul class="space-y-4">
+        <li><a href="#maler" class="footer-link scroll-link">Malerarbeiten</a></li>
+        <li><a href="#boden" class="footer-link scroll-link">Bodenverlegung</a></li>
+        <li><a href="#fassade" class="footer-link scroll-link">Fassadenbau</a></li>
+        <li><a href="#kontakt" class="footer-link scroll-link">Farbberatung</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-heading">Kontakt</h4>
+      <ul class="space-y-4 text-zinc-400 font-medium">
+        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-base">location_on</span> Lokstedter Steindamm 2, 22529 Hamburg</li>
+        <li class="flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-base">call</span> <a href="tel:+4940587101" class="hover:text-white transition-colors">040 / 58 71 01</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-heading">Newsletter</h4>
+      <p class="text-zinc-400 mb-6 font-medium">Trends & Tipps für Ihr Zuhause.</p>
+      <div class="footer-newsletter">
+        <input class="footer-newsletter-input" placeholder="E-Mail" type="email"/>
+        <button class="footer-newsletter-btn">
+          <span class="material-symbols-outlined">send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-16 pt-8 border-t border-white/10 text-center text-zinc-500 text-sm font-bold tracking-widest px-8">
+    © 2026 MALERFACHBETRIEB HORST KÖNIG · MEISTERHAFT SEIT 1979 · HAMBURG
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

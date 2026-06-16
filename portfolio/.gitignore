@@ -1,0 +1,10 @@
+.vercel
+.DS_Store
+.claude/
+*.zip
+ezgif-*/
+*.code-workspace
+can_you_generate_the_picture_*.jpeg
+preview/
+components/
+old-index.html

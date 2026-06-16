@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciko | Chef & AI SaaS Builder</title>
+  <meta name="description" content="Portfolio of Ciko, a 26-year-old chef by day and AI builder by night in Hamburg, Germany. Founder of SmartKartoffel SaaS.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── PRELOADER ── -->
+  <div id="loader">
+    <div class="loader-curtain lc-left"></div>
+    <div class="loader-curtain lc-right"></div>
+    
+    <div class="loader-content">
+      <!-- Hidden logo to satisfy DOM queries in script.js -->
+      <div class="loader-logo" style="display: none;">ciko.dev</div>
+      
+      <!-- Gold progress bar loader -->
+      <div class="loader-bar-wrap">
+        <div class="loader-bar-track">
+          <div class="loader-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- Status messages and progress percentage below -->
+      <div class="loader-status-container">
+        <span class="loader-pct">00%</span>
+      </div>
+
+      <!-- Status messages log below the card -->
+      <div class="loader-msg" style="margin-top: 16px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-align: center;">Booting system...</div>
+    </div>
+  </div>
+
+  <!-- Custom Glow Elements -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+
+  <!-- Header -->
+  <header class="reveal-header">
+    <div class="nav-container">
+      <div class="logo-group">
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span data-translate-id="status-badge">Chef by Day // AI Builder at 4AM</span>
+        </div>
+      </div>
+      <nav class="desktop-nav">
+        <a href="#terminal" data-translate-id="nav-terminal">Terminal</a>
+        <a href="#projects" data-translate-id="nav-projects">Projects</a>
+        <a href="#services" data-translate-id="nav-services">Services</a>
+        <a href="#timeline" data-translate-id="nav-timeline">Timeline</a>
+      </nav>
+      <div class="nav-right">
+        <a href="mailto:rico.jonathan80@gmail.com" class="cta-nav" data-translate-id="nav-cta">Get in touch</a>
+      </div>
+      <button class="mobile-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav">
+    <a href="#terminal" data-translate-id="nav-terminal">Terminal</a>
+    <a href="#projects" data-translate-id="nav-projects">Projects</a>
+    <a href="#services" data-translate-id="nav-services">Services</a>
+    <a href="#timeline" data-translate-id="nav-timeline">Timeline</a>
+    <a href="mailto:rico.jonathan80@gmail.com" class="cta-nav-mobile" data-translate-id="nav-cta">Get in touch</a>
+  </div>
+
+  <!-- Hero Section (Full-screen background character with left-aligned terminal) -->
+  <section class="hero-section" id="hero">
+      <!-- Full-screen Background Character Frame Animation -->
+      <div class="hero-bg-character-container">
+        <video id="character-video" class="hero-bg-character-img" autoplay loop muted playsinline>
+          <source src="0531.mp4" type="video/mp4">
+        </video>
+        <div class="hero-bottom-fade"></div>
+      </div>
+
+      <!-- Foreground Content Container -->
+      <div class="hero-content-container">
+        <!-- Folders Dock (Stacked vertically in the middle on desktop, horizontal on mobile) -->
+        <div class="mac-folders-dock reveal-stagger">
+          <!-- Folder 1: Projects -->
+          <div class="mac-folder-wrapper folder-projects reveal-scale" onclick="scrollSection('#projects')">
+            <div class="mac-folder-icon">
+              <svg viewBox="0 0 64 50" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="50">
+                <path d="M4 8C4 5.8 5.8 4 8 4H22C23.2 4 24.3 4.5 25 5.4L28 9H56C58.2 9 60 10.8 60 13V42C60 44.2 58.2 46 56 46H8C5.8 46 4 44.2 4 42V8Z" fill="url(#f1-back)"/>
+                <rect x="3" y="14" width="58" height="32" rx="4" fill="url(#f1-front)"/>
+                <rect x="3" y="14" width="58" height="4" rx="4" fill="rgba(255,255,255,0.2)"/>
+                <rect x="3" y="42" width="58" height="4" rx="2" fill="rgba(0,0,0,0.06)"/>
+                <defs>
+                  <linearGradient id="f1-back" x1="32" y1="4" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#7DD8F5"/>
+                    <stop offset="100%" stop-color="#4AB8E2"/>
+                  </linearGradient>
+                  <linearGradient id="f1-front" x1="32" y1="14" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#8DE4FC"/>
+                    <stop offset="50%" stop-color="#5DC8F0"/>
+                    <stop offset="100%" stop-color="#47B5E0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="mac-folder-name" data-translate-id="folder-projects">My Projects</span>
+          </div>
+
+          <!-- Folder 2: Workspace -->
+          <div class="mac-folder-wrapper folder-workspace reveal-scale" onclick="scrollSection('.automation-blueprints-container')">
+            <div class="mac-folder-icon">
+              <svg viewBox="0 0 64 50" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="50">
+                <path d="M4 8C4 5.8 5.8 4 8 4H22C23.2 4 24.3 4.5 25 5.4L28 9H56C58.2 9 60 10.8 60 13V42C60 44.2 58.2 46 56 46H8C5.8 46 4 44.2 4 42V8Z" fill="url(#f2-back)"/>
+                <rect x="3" y="14" width="58" height="32" rx="4" fill="url(#f2-front)"/>
+                <rect x="3" y="14" width="58" height="4" rx="4" fill="rgba(255,255,255,0.2)"/>
+                <rect x="3" y="42" width="58" height="4" rx="2" fill="rgba(0,0,0,0.06)"/>
+                <defs>
+                  <linearGradient id="f2-back" x1="32" y1="4" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#7DD8F5"/>
+                    <stop offset="100%" stop-color="#4AB8E2"/>
+                  </linearGradient>
+                  <linearGradient id="f2-front" x1="32" y1="14" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#8DE4FC"/>
+                    <stop offset="50%" stop-color="#5DC8F0"/>
+                    <stop offset="100%" stop-color="#47B5E0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="mac-folder-name" data-translate-id="folder-blueprints">Blueprints</span>
+          </div>
+
+          <!-- Folder 3: Journey -->
+          <div class="mac-folder-wrapper folder-journey reveal-scale" onclick="scrollSection('#timeline')">
+            <div class="mac-folder-icon">
+              <svg viewBox="0 0 64 50" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="50">
+                <path d="M4 8C4 5.8 5.8 4 8 4H22C23.2 4 24.3 4.5 25 5.4L28 9H56C58.2 9 60 10.8 60 13V42C60 44.2 58.2 46 56 46H8C5.8 46 4 44.2 4 42V8Z" fill="url(#f3-back)"/>
+                <rect x="3" y="14" width="58" height="32" rx="4" fill="url(#f3-front)"/>
+                <rect x="3" y="14" width="58" height="4" rx="4" fill="rgba(255,255,255,0.2)"/>
+                <rect x="3" y="42" width="58" height="4" rx="2" fill="rgba(0,0,0,0.06)"/>
+                <defs>
+                  <linearGradient id="f3-back" x1="32" y1="4" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#7DD8F5"/>
+                    <stop offset="100%" stop-color="#4AB8E2"/>
+                  </linearGradient>
+                  <linearGradient id="f3-front" x1="32" y1="14" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#8DE4FC"/>
+                    <stop offset="50%" stop-color="#5DC8F0"/>
+                    <stop offset="100%" stop-color="#47B5E0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="mac-folder-name" data-translate-id="folder-journey">My Journey</span>
+          </div>
+        </div>
+
+        <!-- Right Column (Intro Text + Interactive Terminal) -->
+        <div class="hero-right-column reveal-stagger">
+          <!-- Big Text Introduction -->
+          <div class="hero-intro-text">
+            <h1 class="reveal" data-translate-id="hero-title">AI Engineer &<br>Integration Developer</h1>
+            <p class="reveal" data-translate-id="hero-desc">Chef by day. Self-taught builder at 4AM. Based in Hamburg, originally from Bandung. I design AI integrations, automate business workflows, and ship production software — funded entirely by kitchen shifts.</p>
+          </div>
+
+          <!-- Interactive Terminal Widget -->
+          <div class="terminal-widget reveal" id="terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="terminal-title">ciko@workspace: ~</div>
+              <div class="terminal-action" onclick="runTerminalCommand('clear')" data-translate-id="term-clear-btn">Clear</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-line system-msg" data-translate-id="term-initializing">Initializing 4AM session...</div>
+              <div class="terminal-line system-msg" data-translate-id="term-active">Session: ACTIVE (Chef by day // Builder by night)</div>
+              <div class="terminal-line system-msg" data-translate-id="term-location">Location: Hamburg, Germany 🇩🇪 [Origin: Bandung, Indonesia 🇮🇩]</div>
+              <div class="terminal-line system-msg" data-translate-id="term-instructions">Type <span class="cmd-highlight">help</span> or <span class="cmd-highlight">cat bio.json</span> to inspect the builder's profile.</div>
+              <div class="terminal-output-container" id="terminal-outputs"></div>
+            </div>
+            
+            <!-- Docked Quick Toolbar -->
+            <div class="terminal-quick-bar">
+              <span class="quick-lbl" data-translate-id="term-quick-lbl">Quick Command:</span>
+              <button onclick="runTerminalCommand('about')">about</button>
+              <button onclick="runTerminalCommand('skills')">skills</button>
+              <button onclick="runTerminalCommand('tools')">tools</button>
+              <button onclick="runTerminalCommand('projects')">projects</button>
+              <button onclick="runTerminalCommand('routine')">routine</button>
+              <button onclick="runTerminalCommand('contact')">contact</button>
+              <button onclick="runTerminalCommand('sudo unlock-bonus')">secret</button>
+              <button onclick="runTerminalCommand('clear')">clear</button>
+            </div>
+            
+            <!-- Docked Static Input Prompt -->
+            <div class="terminal-input-line">
+              <span class="prompt">ciko@workspace:~$</span>
+              <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="type command..." data-translate-id="term-input-placeholder">
+            </div>
+          </div>
+
+          <!-- Floating Vertical Social Links (Aligned to right of terminal) -->
+          <div class="hero-social-dock reveal">
+            <a href="https://instagram.com/cikojaja" target="_blank" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@cikojaja" target="_blank" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/cikojaja" target="_blank" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+            </a>
+            <a href="mailto:rico.jonathan80@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+            <div class="social-dock-line"></div>
+          </div>
+        </div>
+
+    </section>
+
+  <main>
+
+    <!-- Bento Grid Section -->
+    <section class="projects-section" id="projects">
+      
+      <!-- Option A Cyber-Background -->
+      <div class="projects-bg-grid"></div>
+      <div class="projects-bg-glow projects-glow-1"></div>
+      <div class="projects-bg-glow projects-glow-2"></div>
+      <div class="projects-bg-glow projects-glow-3"></div>
+
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="eyebrow" data-translate-id="section-projects-eyebrow">Portfolio</div>
+          <h2 data-translate-id="section-projects-title">Selected Projects</h2>
+          <p data-translate-id="section-projects-desc">Hover over any card to bring it to focus, and click to inspect its workflow.</p>
+        </div>
+
+      <!-- Premium Mailmodo-Style Fanned Card Deck Container -->
+      <div class="project-deck-container reveal-stagger layout-deck">
+        
+        <!-- SmartKartoffel -->
+        <div class="bento-card project-deck-card reveal-scale" onclick="openProjectModal('smartkartoffel', this)">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="project-meta">
+              <span class="badge badge-hot" data-translate-id="proj-smartkartoffel-badge">SaaS Startup</span>
+              <span class="tech-tag">React / Node.js</span>
+              <span class="tech-tag">OpenAI</span>
+            </div>
+            <span class="arrow-icon">↗</span>
+          </div>
+          <div class="card-content">
+            <h3 class="proj-title">
+              <svg class="proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3c-4.5 0-8 3-8 7.5s2.5 7.5 6 8.5c1.5.5 3 .5 4.5 0 3.5-1 6-4 6-8.5S16.5 3 12 3z" />
+                <circle cx="8" cy="9" r="1" fill="currentColor"/>
+                <circle cx="16" cy="11" r="1" fill="currentColor"/>
+                <circle cx="12" cy="14" r="1" fill="currentColor"/>
+                <path d="M19 3l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" fill="currentColor" stroke="none"/>
+              </svg>
+              SmartKartoffel
+            </h3>
+            <p class="proj-summary" data-translate-id="proj-smartkartoffel-desc">
+              An AI German tutor explaining grammar in 25 languages. Features speech practice, real-time corrections, and a Camera Scan Lookup that extracts text from real-world German packaging or menus instantly.
+            </p>
+            <div class="service-details-row" style="margin-top: 16px;">
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-smartkartoffel-det1">Camera OCR — scan menus, packaging, signs</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-smartkartoffel-det2">25 native languages, &lt; 1.2s latency</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-smartkartoffel-det3">Whisper speech practice + real-time corrections</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JPKE Kapitalverwaltung -->
+        <div class="bento-card project-deck-card reveal-scale" onclick="openProjectModal('jpke', this)">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="project-meta">
+              <span class="badge badge-indigo" data-translate-id="proj-jpke-badge">AI Automation</span>
+              <span class="tech-tag">Notion API</span>
+              <span class="tech-tag">DE/EN Translation</span>
+            </div>
+            <span class="arrow-icon">↗</span>
+          </div>
+          <div class="card-content">
+            <h3 class="proj-title">
+              <svg class="proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                <circle cx="18.7" cy="8" r="2" fill="currentColor" />
+                <circle cx="7" cy="14.3" r="2" fill="currentColor" />
+                <path d="M21 5h-4v4" />
+              </svg>
+              JPKE Lead Funnel
+            </h3>
+            <p class="proj-summary" data-translate-id="proj-jpke-desc">
+              A functional lead pipeline featuring an <strong>automated qualification chatbot with real-time English-German translation</strong>. Filters serious inquiries, compiles bilingual summaries, and automatically syncs client details directly to a <strong>Notion CRM database</strong> using custom webhooks.
+            </p>
+            <div class="service-details-row" style="margin-top: 16px;">
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-jpke-det1">Bilingual chatbot — DE / EN qualification</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-jpke-det2">Zero admin — 100% automated lead capture</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-jpke-det3">Notion CRM sync via official API</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Malerei König -->
+        <div class="bento-card project-deck-card reveal-scale" onclick="openProjectModal('malerei-koenig', this)">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="project-meta">
+              <span class="badge" data-translate-id="proj-koenig-badge">Performance Study</span>
+              <span class="tech-tag">CSS Grid</span>
+              <span class="tech-tag">Perf Optimization</span>
+            </div>
+            <span class="arrow-icon">↗</span>
+          </div>
+          <div class="card-content">
+            <h3 class="proj-title">
+              <svg class="proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h12v4H6z" />
+                <path d="M19 7v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7" />
+                <path d="M12 12v6" />
+                <path d="M9 18h6" />
+                <path d="M8 5l2-2 2 2 2-2 2 2" />
+              </svg>
+              Malerei König
+            </h3>
+            <p class="proj-summary" data-translate-id="proj-koenig-desc">
+              A high-performance pricing and automation system for a service business. Features a dynamic interactive cost-calculator and an optimized frontend rendering engine achieving a 98/100 Lighthouse performance rating under 100ms layout shift.
+            </p>
+            <div class="service-details-row" style="margin-top: 16px;">
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-koenig-det1">98/100 Lighthouse — zero layout shift</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-koenig-det2">React dynamic cost calculator</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-koenig-det3">Live pricing engine under 100ms</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Planten Coffee -->
+        <div class="bento-card project-deck-card reveal-scale" onclick="openProjectModal('planten-coffee', this)">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="project-meta">
+              <span class="badge" data-translate-id="proj-planten-badge">Client Interface</span>
+              <span class="tech-tag">SVG Animations</span>
+              <span class="tech-tag">LocalStorage</span>
+            </div>
+            <span class="arrow-icon">↗</span>
+          </div>
+          <div class="card-content">
+            <h3 class="proj-title">
+              <svg class="proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                <line x1="6" y1="2" x2="6" y2="4" />
+                <path d="M10 2c0 2-2 3-2 3s3-1 3-3z" />
+                <path d="M14 2c0 2-2 3-2 3s3-1 3-3z" />
+              </svg>
+              Planten Coffee
+            </h3>
+            <p class="proj-summary" data-translate-id="proj-planten-desc">
+              A responsive, interactive digital menu interface designed for retail. Showcases custom SVG micro-animations, localStorage shopping cart state management, and optimized render paths.
+            </p>
+            <div class="service-details-row" style="margin-top: 16px;">
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-planten-det1">12 custom SVG micro-animations</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-planten-det2">localStorage cart — zero backend</span></div>
+              <div class="service-detail"><span class="bullet">→</span> <span data-translate-id="proj-planten-det3">Optimized static bundle, instant load</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Carousel Indicators -->
+      <div class="mobile-carousel-indicator">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Integration Blueprints Section -->
+      <div class="automation-blueprints-container">
+        <div class="section-subheader reveal">
+          <div class="eyebrow" data-translate-id="section-blueprints-eyebrow">Integration Blueprints</div>
+          <h3 data-translate-id="section-blueprints-title">Active Backend Automation Pipelines</h3>
+          <p data-translate-id="section-blueprints-desc">Real-time data flows visualizing custom webhook systems, API connections, and automated CRM syncs.</p>
+        </div>
+
+        <div class="blueprints-grid reveal-stagger">
+          
+          <!-- Pipeline 1: SmartKartoffel Feedback Loop -->
+          <div class="blueprint-card reveal-scale">
+            <div class="card-glow"></div>
+            <div class="blueprint-header">
+              <h4 class="blueprint-title">SmartKartoffel // Unified User Feedback Loop</h4>
+              <div class="blueprint-tech">
+                <span>Node.js API Webhook</span>
+                <span>OpenAI GPT-4o</span>
+                <span>Notion Database Sync</span>
+                <span>SMTP Mail Notification</span>
+              </div>
+              <p class="blueprint-desc" data-translate-id="bp-smartkartoffel-desc">Automatically logs client feedback, analyzes sentiment, and dispatches mailbox alerts with zero admin overhead.</p>
+            </div>
+            
+            <div class="pipeline-track">
+              <!-- Node 1: Trigger -->
+              <div class="pipeline-node node-trigger">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-smartkartoffel-n1-title">User Feedback</h5>
+                  <span data-translate-id="bp-smartkartoffel-n1-sub">Trigger Inbound</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 2: AI Process -->
+              <div class="pipeline-node node-ai">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    <circle cx="12" cy="12" r="4"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-smartkartoffel-n2-title">AI Sentiment</h5>
+                  <span data-translate-id="bp-smartkartoffel-n2-sub">GPT Priority Flag</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 3: Database Sync -->
+              <div class="pipeline-node node-notion">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-smartkartoffel-n3-title">Notion Tasks</h5>
+                  <span data-translate-id="bp-smartkartoffel-n3-sub">CRM Database Log</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 4: SMTP Notification -->
+              <div class="pipeline-node node-mail">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-smartkartoffel-n4-title">Mail Notification</h5>
+                  <span data-translate-id="bp-smartkartoffel-n4-sub">Owner Inbox SMTP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Pipeline 2: JPKE Lead Gen & Booking Funnel -->
+          <div class="blueprint-card reveal-scale reveal-delay-1">
+            <div class="card-glow"></div>
+            <div class="blueprint-header">
+              <h4 class="blueprint-title">JPKE Lead Funnel // Automated Booking Funnel</h4>
+              <div class="blueprint-tech">
+                <span>Vercel Serverless</span>
+                <span>OpenAI Sentiment API</span>
+                <span>Notion CRM Integration</span>
+                <span>Google Calendar API</span>
+              </div>
+              <p class="blueprint-desc" data-translate-id="bp-jpke-desc">Qualifies incoming visitors, compiling and saving answers to push CRM data to Notion and automatically generate calendar appointment slots.</p>
+            </div>
+            
+            <div class="pipeline-track">
+              <!-- Node 1: Trigger -->
+              <div class="pipeline-node node-trigger">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-jpke-n1-title">Chatbot Inbound</h5>
+                  <span data-translate-id="bp-jpke-n1-sub">Intent Qualifier</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 2: AI Process -->
+              <div class="pipeline-node node-ai">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-jpke-n2-title">Lead Summary</h5>
+                  <span data-translate-id="bp-jpke-n2-sub">Bilingual Processing</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 3: Database Sync -->
+              <div class="pipeline-node node-notion">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-jpke-n3-title">Notion CRM</h5>
+                  <span data-translate-id="bp-jpke-n3-sub">Board Record Synced</span>
+                </div>
+              </div>
+              
+              <div class="pipeline-connector">
+                <span class="pipeline-pulse"></span>
+              </div>
+              
+              <!-- Node 4: Calendar Sync -->
+              <div class="pipeline-node node-calendar">
+                <div class="node-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div class="node-details">
+                  <h5 data-translate-id="bp-jpke-n4-title">Calendar API</h5>
+                  <span data-translate-id="bp-jpke-n4-sub">Create Appointment</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Services Section Header -->
+      <div class="section-subheader reveal" style="margin-top: 100px;">
+        <div class="eyebrow" data-translate-id="section-services-eyebrow">Services</div>
+        <h3 data-translate-id="section-services-title">What I Do</h3>
+        <p data-translate-id="section-services-desc">Highly specialized consulting and engineering services to automate, optimize, and intelligent-charge your digital workflows.</p>
+      </div>
+
+      <!-- Option B Mobile Tabs Menu -->
+      <div class="services-tabs-menu" id="services-tabs-menu">
+        <button class="tab-btn active" onclick="setServiceActiveTab(0)" data-translate-id="tab-ai">✦ AI Systems</button>
+        <button class="tab-btn" onclick="setServiceActiveTab(1)" data-translate-id="tab-webhooks">⚙ Webhooks</button>
+        <button class="tab-btn" onclick="setServiceActiveTab(2)" data-translate-id="tab-apps">💻 Web Apps</button>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="bento-utilities-grid reveal-stagger layout-tabs" id="services">
+        
+        <!-- Service 1: AI Integrations (Featured, spans 2 columns) -->
+        <div class="bento-card service-card featured reveal-scale tab-active reveal-card-container" style="--accent-color: var(--accent-cyan); --on-accent-fg: #050508; --on-accent-muted: rgba(5,5,8,0.7);">
+          <div class="card-glow"></div>
+          
+          <!-- Base Card View (Plain Dark Layout - No Icon) -->
+          <div class="card-base-view">
+            <div class="card-header">
+              <div style="width: 42px; height: 42px; visibility: hidden;"></div>
+              <div class="project-meta">
+                <span class="badge badge-hot">Core Service</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-ai-title">AI System & LLM Integrations</h3>
+              <p class="proj-summary" data-translate-id="service-ai-desc">
+                Connecting backend applications to Large Language Models. Custom prompt schemas, OpenAI API orchestration, speech-to-text workflows, structured JSON parsers, and camera OCR text scanning tools.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det1">System prompt architecture & optimization</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det2">Whisper & TTS voice synthesis pipelines</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det3">Multi-language translation models</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay Card View (Accented Theme Layout - With Icon) -->
+          <div class="card-overlay-view">
+            <div class="card-header">
+              <span class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                  <circle cx="12" cy="12" r="4"/>
+                </svg>
+              </span>
+              <div class="project-meta">
+                <span class="badge" style="border-color: rgba(5,5,8,0.15); color: rgba(5,5,8,0.8);">Core Service</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-ai-title">AI System & LLM Integrations</h3>
+              <p class="proj-summary" data-translate-id="service-ai-desc">
+                Connecting backend applications to Large Language Models. Custom prompt schemas, OpenAI API orchestration, speech-to-text workflows, structured JSON parsers, and camera OCR text scanning tools.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det1">System prompt architecture & optimization</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det2">Whisper & TTS voice synthesis pipelines</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-ai-det3">Multi-language translation models</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2: Webhooks & Automations -->
+        <div class="bento-card service-card reveal-scale reveal-card-container" style="--accent-color: var(--accent-indigo); --on-accent-fg: #ffffff; --on-accent-muted: rgba(255,255,255,0.75);">
+          <div class="card-glow"></div>
+
+          <!-- Base Card View (Plain Dark Layout - No Icon) -->
+          <div class="card-base-view">
+            <div class="card-header">
+              <div style="width: 42px; height: 42px; visibility: hidden;"></div>
+              <div class="project-meta">
+                <span class="badge badge-indigo" data-translate-id="service-webhooks-badge">Automation</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-webhooks-title">Webhooks & API Pipelines</h3>
+              <p class="proj-summary" data-translate-id="service-webhooks-desc">
+                Connecting user actions directly to CRM and team dashboards. Custom webhook setups qualifying prospects, syncing records to Notion boards, calendar APIs, and SMTP notifications.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det1">Notion API lead boards</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det2">Google Calendar & Meet bookings</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det3">SMTP & Mailer integrations</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay Card View (Accented Theme Layout - With Icon) -->
+          <div class="card-overlay-view">
+            <div class="card-header">
+              <span class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </span>
+              <div class="project-meta">
+                <span class="badge" style="border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.85);" data-translate-id="service-webhooks-badge">Automation</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-webhooks-title">Webhooks & API Pipelines</h3>
+              <p class="proj-summary" data-translate-id="service-webhooks-desc">
+                Connecting user actions directly to CRM and team dashboards. Custom webhook setups qualifying prospects, syncing records to Notion boards, calendar APIs, and SMTP notifications.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det1">Notion API lead boards</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det2">Google Calendar & Meet bookings</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-webhooks-det3">SMTP & Mailer integrations</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3: Frontend Web Apps -->
+        <div class="bento-card service-card reveal-scale reveal-card-container" style="--accent-color: #F0EDE6; --on-accent-fg: #0A0A0A; --on-accent-muted: rgba(10,10,10,0.6);">
+          <div class="card-glow"></div>
+
+          <!-- Base Card View (Plain Dark Layout - No Icon) -->
+          <div class="card-base-view">
+            <div class="card-header">
+              <div style="width: 42px; height: 42px; visibility: hidden;"></div>
+              <div class="project-meta">
+                <span class="badge" data-translate-id="service-apps-badge">Development</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-apps-title">High-Performance Web Apps</h3>
+              <p class="proj-summary" data-translate-id="service-apps-desc">
+                Highly responsive frontend layers with zero layout shifts. Specialized in dynamic pricing calculators, localStorage state cards, custom vector animations, and Next.js / React views.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det1">95+ Lighthouse audits</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det2">Interactive dynamic calculations</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det3">Offline localStorage persistence</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay Card View (Accented Theme Layout - With Icon) -->
+          <div class="card-overlay-view">
+            <div class="card-header">
+              <span class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </span>
+              <div class="project-meta">
+                <span class="badge" style="border-color: rgba(5,5,8,0.15); color: rgba(5,5,8,0.8);" data-translate-id="service-apps-badge">Development</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="proj-title" data-translate-id="service-apps-title">High-Performance Web Apps</h3>
+              <p class="proj-summary" data-translate-id="service-apps-desc">
+                Highly responsive frontend layers with zero layout shifts. Specialized in dynamic pricing calculators, localStorage state cards, custom vector animations, and Next.js / React views.
+              </p>
+              <div class="service-details-row">
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det1">95+ Lighthouse audits</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det2">Interactive dynamic calculations</span></div>
+                <div class="service-detail"><span class="bullet">✦</span> <span data-translate-id="service-apps-det3">Offline localStorage persistence</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- End projects-section container -->
+    </section>
+
+    <!-- Timeline / Experience Section -->
+    <section class="timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="eyebrow" data-translate-id="section-timeline-eyebrow">Experience</div>
+          <h2 data-translate-id="section-timeline-title">Journey Log</h2>
+        </div>
+
+        <div class="timeline-container reveal-stagger">
+          
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="time-header">
+                <span class="role-title" data-translate-id="journey-smartkartoffel-role">Founder & Solo Engineer</span>
+                <span class="date">2025 - Present</span>
+              </div>
+              <div class="company" data-translate-id="journey-smartkartoffel-company">SmartKartoffel (EdTech SaaS)</div>
+              <p data-translate-id="journey-smartkartoffel-desc">Designed and coded an AI German tutor explaining grammar in 25 native languages. Engineered prompt schemas, translation pipelines, SQL user metrics, and payment gateway syncs at 4AM before starting kitchen shifts.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="time-header">
+                <span class="role-title" data-translate-id="journey-chef-role">Professional Chef</span>
+                <span class="date">2023 - Present</span>
+              </div>
+              <div class="company" data-translate-id="journey-chef-company">Gastronomy Industry (Hamburg)</div>
+              <p data-translate-id="journey-chef-desc">Executing high-pressure culinary operations in 10-hour shifts. Self-funding all software development, hosting, and API subscription costs to maintain complete independence.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="time-header">
+                <span class="role-title" data-translate-id="journey-freelance-role">Full-Stack Developer</span>
+                <span class="date">2025</span>
+              </div>
+              <div class="company" data-translate-id="journey-freelance-company">Freelance Web Engineering</div>
+              <p data-translate-id="journey-freelance-desc">Programmed custom booking layers, calculators, and API interfaces (JPKE Leadbot, Malerei König cost estimator, Planten Coffee) scoring &gt;95 on Lighthouse performance rankings.</p>
+            </div>
+          </div>
+
+        </div> <!-- End timeline-section container -->
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card reveal-scale">
+          <div class="card-glow"></div>
+          <h2 data-translate-id="cta-title">Let's build something remarkable.</h2>
+          <p data-translate-id="cta-desc">Seeking software engineering roles or builder connections. Let's discuss how I can bring high-pressure execution speed, discipline, and product design experience to your team.</p>
+          <div class="cta-actions">
+            <a href="mailto:rico.jonathan80@gmail.com" class="btn btn-primary" data-translate-id="cta-btn-email">Send Email</a>
+            <button class="btn btn-secondary" onclick="runTerminalCommand('contact')" data-translate-id="cta-btn-social">Get Social Links</button>
+          </div>
+        </div> <!-- End cta-section container -->
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p data-translate-id="footer-text">© 2026 Ciko. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="../" data-translate-id="footer-main">Main Portfolio</a>
+        <a href="mailto:rico.jonathan80@gmail.com" data-translate-id="footer-contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Visual Workflow Overlay Modal -->
+  <div id="project-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeProjectModal()">&times;</button>
+      <div id="modal-project-meta" class="modal-project-meta"></div>
+      <h3 id="modal-project-title" class="modal-project-title"></h3>
+      
+      <!-- Visual Flowchart container -->
+      <div class="modal-section">
+        <h4 class="modal-sec-title">Workflow Pipeline</h4>
+        <div id="modal-workflow-flow" class="workflow-flow">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Guidelines/Specs List -->
+      <div class="modal-section">
+        <h4 class="modal-sec-title">Implementation Guidelines & Details</h4>
+        <ul id="modal-guidelines-list" class="guidelines-list">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+      <!-- Action Links -->
+      <div class="modal-section" style="margin-top: 32px; margin-bottom: 0;">
+        <h4 class="modal-sec-title">Links & Previews</h4>
+        <div id="modal-project-links" style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      const fill = document.querySelector('.loader-bar-fill');
+      const pct = document.querySelector('.loader-pct');
+      if (!fill || !pct) return;
+      new MutationObserver(() => {
+        const val = parseInt(pct.textContent) || 0;
+        fill.style.width = val + '%';
+      }).observe(pct, { childList: true, characterData: true, subtree: true });
+    })();
+  </script>
+</body>
+</html>

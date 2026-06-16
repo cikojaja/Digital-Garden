@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartKartoffel — Feature Carousels</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; font-family: 'Plus Jakarta Sans', sans-serif; padding: 32px 16px; }
+
+  h2 { color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; margin: 48px 0 16px; opacity: 0.4; }
+  h2:first-child { margin-top: 0; }
+
+  .row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+
+  .slide {
+    width: 270px; height: 338px;
+    border-radius: 22px; overflow: hidden;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 26px 22px;
+    flex-shrink: 0;
+  }
+
+  .bg-teal    { background: linear-gradient(150deg,#005f6b,#12b0c5); }
+  .bg-dark    { background: linear-gradient(150deg,#0a1628,#162440); }
+  .bg-white   { background: #fff; }
+  .bg-charcoal{ background: linear-gradient(150deg,#1a1a2e,#2a2a44); }
+  .bg-coral   { background: linear-gradient(150deg,#c0392b,#e74c3c); }
+  .bg-purple  { background: linear-gradient(150deg,#4a2fbd,#6c63ff); }
+
+  /* ── BIG TEXT ── */
+  .big { font-size: 32px; font-weight: 900; line-height: 1.1; color: #fff; letter-spacing: -0.5px; }
+  .bg-white .big { color: #111; }
+  .big em { font-style: normal; color: #FFD700; }
+  .bg-white .big em { color: #006876; }
+
+  .med { font-size: 18px; font-weight: 700; line-height: 1.2; color: rgba(255,255,255,0.85); }
+  .bg-white .med { color: rgba(0,0,0,0.65); }
+
+  .small { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .bg-white .small { color: rgba(0,0,0,0.45); }
+
+  .label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    margin-bottom: 10px;
+  }
+  .bg-white .label { color: rgba(0,0,0,0.35); }
+
+  .emoji { font-size: 58px; line-height: 1; display: block; margin-bottom: 16px; }
+  .emoji-sm { font-size: 36px; line-height: 1; display: block; margin-bottom: 12px; }
+
+  /* ── APP UI MOCKUP ── */
+  .phone-ui {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-top: 14px;
+  }
+  .bg-white .phone-ui {
+    background: #f2f8fa;
+    border-color: rgba(0,104,118,0.12);
+  }
+
+  /* chat bubbles */
+  .bubble-user {
+    background: linear-gradient(135deg,#006876,#12b0c5);
+    border-radius: 16px 16px 4px 16px;
+    padding: 9px 13px;
+    font-size: 13px; font-weight: 600; color: #fff;
+    display: inline-block; margin-bottom: 8px;
+    max-width: 100%;
+  }
+  .bubble-ai {
+    background: rgba(255,255,255,0.12);
+    border-radius: 16px 16px 16px 4px;
+    padding: 10px 13px;
+    font-size: 12px; font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.5;
+  }
+  .bg-white .bubble-ai {
+    background: #e8f4f7;
+    color: rgba(0,0,0,0.75);
+  }
+  .bubble-ai .row-item {
+    display: flex; gap: 6px; margin-bottom: 4px; align-items: flex-start;
+  }
+  .bubble-ai .row-item:last-child { margin-bottom: 0; }
+
+  /* ── FLAGS ── */
+  .flag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .fpill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .fpill span { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8); }
+
+  /* ── COMPARE ── */
+  .cmp { border-radius: 12px; padding: 10px 13px; margin-bottom: 7px; }
+  .cmp-bad  { background: rgba(186,26,26,0.18); border: 1px solid rgba(255,100,100,0.2); }
+  .cmp-good { background: rgba(52,201,122,0.18); border: 1px solid rgba(52,201,122,0.25); }
+  .bg-white .cmp-bad  { background: rgba(186,26,26,0.07); }
+  .bg-white .cmp-good { background: rgba(52,201,122,0.08); }
+  .cmp-tag { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .cmp-bad  .cmp-tag { color: #ff7070; }
+  .cmp-good .cmp-tag { color: #34c97a; }
+  .cmp-text { font-size: 14px; font-weight: 700; color: #fff; }
+  .bg-white .cmp-text { color: #111; }
+
+  /* ── RULE BOX ── */
+  .rule {
+    background: rgba(255,215,0,0.12);
+    border-left: 3px solid #FFD700;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 13px;
+    margin-top: 10px;
+  }
+  .bg-white .rule {
+    background: rgba(0,104,118,0.07);
+    border-left-color: #006876;
+  }
+  .rule-text { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9); line-height: 1.45; }
+  .bg-white .rule-text { color: rgba(0,0,0,0.75); }
+
+  /* ── MIC UI ── */
+  .mic-center { display: flex; flex-direction: column; align-items: center; margin: 10px 0; }
+  .mic-btn-big {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; margin-bottom: 12px;
+  }
+  .waves { display: flex; align-items: center; gap: 3px; height: 28px; }
+  .w { width: 4px; border-radius: 3px; background: rgba(255,255,255,0.4); }
+
+  /* ── CAMERA UI ── */
+  .cam-frame {
+    border: 2px dashed rgba(255,255,255,0.3);
+    border-radius: 14px;
+    padding: 16px 14px;
+    margin-top: 12px;
+    text-align: center;
+  }
+  .cam-word { font-size: 16px; font-weight: 900; color: #fff; margin: 8px 0 4px; }
+  .cam-badge {
+    display: inline-block;
+    background: #FFD700; color: #111;
+    font-size: 9px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px;
+  }
+
+  /* ── WORD CARD ── */
+  .word-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 14px 15px;
+    margin-top: 12px;
+  }
+  .word-big { font-size: 17px; font-weight: 900; color: #fff; margin-bottom: 10px; }
+  .word-row { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; font-size: 12px; }
+  .word-row:last-child { margin-bottom: 0; }
+  .word-icon { font-size: 13px; flex-shrink: 0; }
+  .word-txt { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+  /* ── CTA ── */
+  .cta-slide {
+    background: #fff;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 24px 20px;
+  }
+  .cta-img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 14px; }
+  .cta-big { font-size: 24px; font-weight: 900; color: #111; line-height: 1.15; margin-bottom: 8px; }
+  .cta-big span { color: #006876; }
+  .cta-sub { font-size: 12px; color: rgba(0,0,0,0.45); font-weight: 500; margin-bottom: 14px; line-height: 1.5; }
+  .cta-url { font-size: 12px; font-weight: 800; color: #006876; letter-spacing: 0.5px; }
+
+  /* ── SAVE ── */
+  .save-btn {
+    display: block; width: 270px; margin: 8px auto 0;
+    background: #1a1a2e; color: #fff;
+    border: none; border-radius: 999px;
+    padding: 8px; font-size: 11px; font-weight: 700;
+    cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .save-btn:hover { opacity: 0.75; }
+  .slide-wrap { display: flex; flex-direction: column; align-items: center; }
+  .snum { color: #444; font-size: 10px; font-weight: 700; margin-top: 5px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════ -->
+<!-- CAROUSEL 1: MULTI-LANGUAGE        -->
+<!-- ══════════════════════════════════ -->
+<h2>Carousel 1 — Multi-Language</h2>
+<div class="row">
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="s1">
+      <span class="emoji">💀</span>
+      <div class="big">Duolingo teaches you German <em>in English.</em></div>
+      <div class="small" style="margin-top:10px">But English isn't even your first language. Swipe 👉</div>
+    </div>
+    <button class="save-btn" onclick="save('s1','ml-1')">Save</button>
+    <div class="snum">1 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-teal" id="s2">
+      <div class="label">SmartKartoffel</div>
+      <div class="big">Explains in <em>your</em> language.</div>
+      <div class="flag-row">
+        <div class="fpill">🇸🇦 <span>Arabic</span></div>
+        <div class="fpill">🇹🇷 <span>Turkish</span></div>
+        <div class="fpill">🇧🇷 <span>Portuguese</span></div>
+        <div class="fpill">🇮🇩 <span>Indonesian</span></div>
+        <div class="fpill">🇫🇷 <span>French</span></div>
+        <div class="fpill">🇪🇸 <span>Spanish</span></div>
+        <div class="fpill">🇯🇵 <span>Japanese</span></div>
+        <div class="fpill">🇰🇷 <span>Korean</span></div>
+        <div class="fpill">🇮🇹 <span>Italian</span></div>
+        <div class="fpill">🇵🇱 <span>Polish</span></div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('s2','ml-2')">Save</button>
+    <div class="snum">2 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="s3">
+      <div class="label">🇸🇦 Arabic speaker</div>
+      <div style="background:#f2f8fa;border-radius:14px;padding:14px 15px">
+        <div class="bubble-user" style="font-size:13px">"Ich bin heiß" ❌</div>
+        <div style="background:#e8f4f7;border-radius:12px;padding:10px 13px;font-size:12px;font-weight:600;line-height:1.5;color:#111">
+          <div style="color:#006876;font-weight:800;margin-bottom:4px">🛠 الصواب: "Mir ist heiß"</div>
+          <div style="color:rgba(0,0,0,0.6)">"Ich bin" تعني الهوية.<br>"Mir ist" تصف إحساس الجسم.</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top:12px;color:rgba(0,0,0,0.4)">Explained in Arabic. Not English.</div>
+    </div>
+    <button class="save-btn" onclick="save('s3','ml-3')">Save</button>
+    <div class="snum">3 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="s4">
+      <div class="label">🇹🇷 Turkish speaker</div>
+      <div style="background:#f2f8fa;border-radius:14px;padding:14px 15px">
+        <div class="bubble-user" style="font-size:13px">"Ich habe 25 Jahre" ❌</div>
+        <div style="background:#e8f4f7;border-radius:12px;padding:10px 13px;font-size:12px;font-weight:600;line-height:1.5;color:#111">
+          <div style="color:#006876;font-weight:800;margin-bottom:4px">🛠 "Ich bin 25 Jahre alt"</div>
+          <div style="color:rgba(0,0,0,0.6)">Almanca'da yaş "sein" (olmak) ile kullanılır. "25 yaşındayım" gibi düşün.</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top:12px;color:rgba(0,0,0,0.4)">Explained in Turkish. Not English.</div>
+    </div>
+    <button class="save-btn" onclick="save('s4','ml-4')">Save</button>
+    <div class="snum">4 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="s5">
+      <div class="label">🇮🇩 Indonesian speaker</div>
+      <div style="background:#f2f8fa;border-radius:14px;padding:14px 15px">
+        <div class="bubble-user" style="font-size:13px">"Ich gehe zu Hause" ❌</div>
+        <div style="background:#e8f4f7;border-radius:12px;padding:10px 13px;font-size:12px;font-weight:600;line-height:1.5;color:#111">
+          <div style="color:#006876;font-weight:800;margin-bottom:4px">🛠 "Ich gehe nach Hause"</div>
+          <div style="color:rgba(0,0,0,0.6)">"Nach Hause" dipakai saat kamu bergerak ke rumah. "Zu Hause" berarti kamu sudah ada di rumah.</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top:12px;color:rgba(0,0,0,0.4)">Explained in Indonesian. Not English.</div>
+    </div>
+    <button class="save-btn" onclick="save('s5','ml-5')">Save</button>
+    <div class="snum">5 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-charcoal" id="s6">
+      <span class="emoji">🥔</span>
+      <div class="big">The only German app that <em>speaks your language.</em></div>
+    </div>
+    <button class="save-btn" onclick="save('s6','ml-6')">Save</button>
+    <div class="snum">6 / 7</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide cta-slide" id="s7" style="display:flex">
+      <img class="cta-img" src="../SmartKartoffel_nobg.png" crossorigin="anonymous">
+      <div class="cta-big">German explained in <span>your language.</span></div>
+      <div class="cta-sub">Start free today — no credit card, no download.<br>Just open and learn.</div>
+      <div class="cta-url">smartkartoffel.com</div>
+      <div class="cta-url" style="font-size:10px;color:rgba(0,0,0,0.3);margin-top:4px">No credit card · Cancel anytime</div>
+    </div>
+    <button class="save-btn" onclick="save('s7','ml-7')">Save</button>
+    <div class="snum">7 / 7</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- CAROUSEL 2: WHY EXPLANATIONS      -->
+<!-- ══════════════════════════════════ -->
+<h2>Carousel 2 — WHY Explanations</h2>
+<div class="row">
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="w1">
+      <span class="emoji">😶</span>
+      <div class="big">I made the same German mistake <em>for 2 years.</em></div>
+      <div class="small" style="margin-top:10px">No app ever told me why. Swipe 👉</div>
+    </div>
+    <button class="save-btn" onclick="save('w1','why-1')">Save</button>
+    <div class="snum">1 / 6</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="w2">
+      <div class="label">Real correction example</div>
+      <div class="cmp cmp-bad">
+        <div class="cmp-tag">❌ You wrote</div>
+        <div class="cmp-text">"Ich bin heiß"</div>
+      </div>
+      <div class="cmp cmp-good">
+        <div class="cmp-tag">✅ Correct</div>
+        <div class="cmp-text">"Mir ist heiß"</div>
+      </div>
+      <div class="rule">
+        <div class="rule-text" style="color:rgba(0,0,0,0.75)">🧠 "Ich bin" = who you ARE.<br>"Mir ist" = how your body FEELS.</div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('w2','why-2')">Save</button>
+    <div class="snum">2 / 6</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="w3">
+      <div class="label">Real correction example</div>
+      <div class="cmp cmp-bad">
+        <div class="cmp-tag">❌ You wrote</div>
+        <div class="cmp-text">"Ich habe 25 Jahre"</div>
+      </div>
+      <div class="cmp cmp-good">
+        <div class="cmp-tag">✅ Correct</div>
+        <div class="cmp-text">"Ich bin 25 Jahre alt"</div>
+      </div>
+      <div class="rule">
+        <div class="rule-text">🧠 Age uses "sein" (to be) in German — not "haben" (to have).</div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('w3','why-3')">Save</button>
+    <div class="snum">3 / 6</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="w4">
+      <div class="label">Real correction example</div>
+      <div class="cmp cmp-bad">
+        <div class="cmp-tag">❌ You wrote</div>
+        <div class="cmp-text">"Ich gehe in die Schule morgen"</div>
+      </div>
+      <div class="cmp cmp-good">
+        <div class="cmp-tag">✅ Correct</div>
+        <div class="cmp-text">"Ich gehe morgen in die Schule"</div>
+      </div>
+      <div class="rule">
+        <div class="rule-text" style="color:rgba(0,0,0,0.75)">🧠 Time before Place in German. Always.</div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('w4','why-4')">Save</button>
+    <div class="snum">4 / 6</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-teal" id="w5">
+      <span class="emoji">💡</span>
+      <div class="big">Understand the rule.<br><em>Never forget.</em></div>
+    </div>
+    <button class="save-btn" onclick="save('w5','why-5')">Save</button>
+    <div class="snum">5 / 6</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide cta-slide" id="w6" style="display:flex">
+      <img class="cta-img" src="../SmartKartoffel_nobg.png" crossorigin="anonymous">
+      <div class="cta-big">Fix your German.<br><span>Understand why.</span></div>
+      <div class="cta-sub">Type any sentence. Get corrected instantly.<br>With the rule. Every time.</div>
+      <div class="cta-url">smartkartoffel.com</div>
+      <div class="cta-url" style="font-size:10px;color:rgba(0,0,0,0.3);margin-top:4px">10 corrections/day free · Always</div>
+    </div>
+    <button class="save-btn" onclick="save('w6','why-6')">Save</button>
+    <div class="snum">6 / 6</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- CAROUSEL 3: VOICE INPUT           -->
+<!-- ══════════════════════════════════ -->
+<h2>Carousel 3 — Voice Input</h2>
+<div class="row">
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="v1">
+      <span class="emoji">😬</span>
+      <div class="big">You practice German by typing. Real life <em>doesn't have a keyboard.</em></div>
+      <div class="small" style="margin-top:10px">Swipe 👉</div>
+    </div>
+    <button class="save-btn" onclick="save('v1','voice-1')">Save</button>
+    <div class="snum">1 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-white" id="v2">
+      <div class="label">Just tap. Speak. Done.</div>
+      <div class="mic-center" style="margin:18px 0">
+        <div class="mic-btn-big" style="background:#006876;border-color:#12b0c5;width:80px;height:80px;font-size:34px">🎤</div>
+        <div class="waves">
+          <div class="w" style="height:6px;background:#006876"></div>
+          <div class="w" style="height:20px;background:#12b0c5"></div>
+          <div class="w" style="height:30px;background:#006876"></div>
+          <div class="w" style="height:16px;background:#12b0c5"></div>
+          <div class="w" style="height:26px;background:#006876"></div>
+          <div class="w" style="height:10px;background:#12b0c5"></div>
+          <div class="w" style="height:22px;background:#006876"></div>
+          <div class="w" style="height:8px;background:#12b0c5"></div>
+          <div class="w" style="height:18px;background:#006876"></div>
+        </div>
+      </div>
+      <div class="big" style="color:#111;font-size:22px;text-align:center">Speak German.<br><span style="color:#006876">Get corrected.</span></div>
+    </div>
+    <button class="save-btn" onclick="save('v2','voice-2')">Save</button>
+    <div class="snum">2 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="v3">
+      <div class="label">🎤 Voice correction</div>
+      <div class="cmp cmp-bad">
+        <div class="cmp-tag">You said</div>
+        <div class="cmp-text">"Ich gehe in die Schule morgen"</div>
+      </div>
+      <div class="cmp cmp-good">
+        <div class="cmp-tag">✅ Corrected</div>
+        <div class="cmp-text">"Ich gehe morgen in die Schule"</div>
+      </div>
+      <div class="rule">
+        <div class="rule-text">🧠 Time before Place. Always.</div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('v3','voice-3')">Save</button>
+    <div class="snum">3 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-charcoal" id="v4">
+      <span class="emoji">🥔</span>
+      <div class="big">No keyboard.<br>No typing.<br><em>No excuses.</em></div>
+    </div>
+    <button class="save-btn" onclick="save('v4','voice-4')">Save</button>
+    <div class="snum">4 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide cta-slide" id="v5" style="display:flex">
+      <img class="cta-img" src="../SmartKartoffel_nobg.png" crossorigin="anonymous">
+      <div class="cta-big">Your German tutor<br><span>is listening.</span></div>
+      <div class="cta-sub">Speak. Get corrected. Understand why.<br>Voice input included — completely free.</div>
+      <div class="cta-url">smartkartoffel.com</div>
+      <div class="cta-url" style="font-size:10px;color:rgba(0,0,0,0.3);margin-top:4px">No download · Works in browser</div>
+    </div>
+    <button class="save-btn" onclick="save('v5','voice-5')">Save</button>
+    <div class="snum">5 / 5</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- CAROUSEL 4: CAMERA                -->
+<!-- ══════════════════════════════════ -->
+<h2>Carousel 4 — Camera Feature</h2>
+<div class="row">
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="c1">
+      <span class="emoji">😭</span>
+      <div class="big">I moved to Germany and couldn't read <em>a single thing.</em></div>
+      <div class="small" style="margin-top:10px">Streets. Menus. Letters. All German. Swipe 👉</div>
+    </div>
+    <button class="save-btn" onclick="save('c1','cam-1')">Save</button>
+    <div class="snum">1 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-teal" id="c2">
+      <div class="label">Point. Shoot. Understand.</div>
+      <div class="cam-frame">
+        <div style="font-size:36px;margin-bottom:8px">📷</div>
+        <div class="cam-word">Krankenversicherung</div>
+        <div class="cam-badge" style="margin-top:8px">Scanning…</div>
+      </div>
+      <div class="small" style="margin-top:14px;text-align:center">Open SmartKartoffel → tap camera → shoot</div>
+    </div>
+    <button class="save-btn" onclick="save('c2','cam-2')">Save</button>
+    <div class="snum">2 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-dark" id="c3">
+      <div class="label">📸 Instant breakdown</div>
+      <div class="word-card">
+        <div class="word-big">Krankenversicherung</div>
+        <div class="word-row"><span class="word-icon">📖</span><span class="word-txt">Health insurance</span></div>
+        <div class="word-row"><span class="word-icon">🏷️</span><span class="word-txt">die Krankenversicherung</span></div>
+        <div class="word-row"><span class="word-icon">🔢</span><span class="word-txt">Plural: -en</span></div>
+        <div class="word-row"><span class="word-icon">🧠</span><span class="word-txt">Krank (sick) + Versicherung (insurance)</span></div>
+        <div class="word-row"><span class="word-icon">💬</span><span class="word-txt">"Ich brauche eine Krankenversicherung."</span></div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="save('c3','cam-3')">Save</button>
+    <div class="snum">3 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide bg-charcoal" id="c4">
+      <span class="emoji">🥔</span>
+      <div class="big">Real world German.<br><em>Instant breakdown.</em></div>
+    </div>
+    <button class="save-btn" onclick="save('c4','cam-4')">Save</button>
+    <div class="snum">4 / 5</div>
+  </div>
+
+  <div class="slide-wrap">
+    <div class="slide cta-slide" id="c5" style="display:flex">
+      <img class="cta-img" src="../SmartKartoffel_nobg.png" crossorigin="anonymous">
+      <div class="cta-big">Never be lost in <span>German again.</span></div>
+      <div class="cta-sub">Point your camera at any German word.<br>Get the full breakdown instantly.</div>
+      <div class="cta-url">smartkartoffel.com</div>
+      <div class="cta-url" style="font-size:10px;color:rgba(0,0,0,0.3);margin-top:4px">3-day free trial · Cancel anytime</div>
+    </div>
+    <button class="save-btn" onclick="save('c5','cam-5')">Save</button>
+    <div class="snum">5 / 5</div>
+  </div>
+
+</div>
+
+<script>
+async function save(id, name) {
+  const slide = document.getElementById(id);
+  const btn = slide.parentElement.querySelector('.save-btn');
+  btn.textContent = 'Saving…'; btn.disabled = true;
+  try {
+    const canvas = await html2canvas(slide, { scale:4, useCORS:true, allowTaint:true, backgroundColor:null });
+    const a = document.createElement('a');
+    a.download = `sk-${name}.png`;
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    btn.textContent = '✅ Saved!';
+    setTimeout(()=>{ btn.textContent='Save'; btn.disabled=false; }, 2000);
+  } catch(e) {
+    btn.textContent = '❌ Run via local server';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
