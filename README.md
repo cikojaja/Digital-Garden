@@ -18,7 +18,7 @@ This repository is organized into three main modules:
 
 | Module | Description | Key Files / Subfolders | How to Use |
 | :--- | :--- | :--- | :--- |
-| **`claude-skills`** | Automation skills for brand identity definition, Google NotebookLM automation, and prompt strategy. | `brand-identity-skill.skill`, `prompt-playbook.md`, `NotebookLMSkill.md` | Drag into Claude Code or run custom slash commands. |
+| **`claude-skills`** | Automation skills for brand identity definition, Google NotebookLM automation, and prompt strategy. | `brand-identity-skill.skill`, `prompt-playbook.md`, `NotebookLMSkill.md`, `learning_skill.md` | Drag into Claude Code or run custom slash commands. |
 | **`workflows`** | Secure Notion database logger with Supabase secrets. | `setup.py`, `supabase/functions/send-feedback/` | Run `setup.py` to bootstrap Notion database & push Edge Functions. |
 | **`portfolio`** | Developer portfolio site showcasing client work. | `GermanApps/`, `dev/`, `horst-koenig/`, `planten-coffee/` | Host on Vercel with root directory set to `/portfolio`. |
 

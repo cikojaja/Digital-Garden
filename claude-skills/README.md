@@ -37,6 +37,13 @@ End-of-session skill that saves a summary of what was built, decided, and learne
 
 ---
 
+### `learning_skill.md` (Supportive Analogical Educator)
+A universal teaching skill that instructs Claude to teach complex subjects, systems, or workflows using real-world analogies, visual flowcharts, and simple jargon-free language.
+
+**How to use:** Install as a skill or prompt Claude to adopt this teaching style to learn any logic step-by-step.
+
+---
+
 ### `SKILL.md`
 Meta skill for building new Claude Code skills. Use it to create your own.
 
