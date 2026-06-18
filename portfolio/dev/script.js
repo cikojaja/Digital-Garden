@@ -82,7 +82,9 @@ const MOCK_FILESYSTEM = {
         details: "Built booking systems, calculators, and API pipelines scoring >95 on Lighthouse audits."
       }
     ]
-  },
+  }
+};
+
 const COMMANDS = {
   help: () => {
     return `Available commands:
@@ -786,6 +788,25 @@ if (projectModal) {
       }, 500);
     });
   });
+
+  // 3. Dynamic background grid mouse tracker for Selected Projects & Blueprints
+  const projectsSec = document.querySelector('.projects-section');
+  if (projectsSec) {
+    let activeFrame = false;
+    projectsSec.addEventListener('mousemove', (e) => {
+      if (!activeFrame) {
+        activeFrame = true;
+        window.requestAnimationFrame(() => {
+          const rect = projectsSec.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          projectsSec.style.setProperty('--mouse-x', `${x}px`);
+          projectsSec.style.setProperty('--mouse-y', `${y}px`);
+          activeFrame = false;
+        });
+      }
+    });
+  }
 })();
 
 // ── Premium GSAP Timed Slider Engine Removed (Fanned deck replaces slider) ──
@@ -822,7 +843,7 @@ if (projectModal) {
   const interval = setInterval(() => {
     // Increment loading percentage
     if (progress < 85) {
-      progress += Math.floor(Math.random() * 2) + 1; // slower increment speed
+      progress += Math.floor(Math.random() * 3) + 2; // faster increment speed
     } else if (progress < 99 && pageLoaded) {
       progress += 1; // wait for window load or complete slowly
     } else if (progress >= 99 && pageLoaded) {
@@ -859,11 +880,11 @@ if (projectModal) {
         setTimeout(() => {
           loader.style.display = 'none';
         }, 1700);
-      }, 500); // 500ms delay at 100%
+      }, 200); // shortened delay at 100%
     }
-  }, 38); // slower interval (from 22ms to 38ms)
+  }, 20); // faster interval
   
-  // Hard fallback: never lock user screen more than 8s
+  // Hard fallback: never lock user screen more than 3s
   setTimeout(() => {
     clearInterval(interval);
     loader.classList.add('hidden');
@@ -876,7 +897,7 @@ if (projectModal) {
     setTimeout(() => {
       loader.style.display = 'none';
     }, 1700);
-  }, 8000);
+  }, 3000);
 })();
 
 // ── Header Scrolled State & Scroll Spy ───────────────────
@@ -1195,7 +1216,8 @@ if (projectModal) {
     }
   }
 
-    });
+  function setLanguage(lang) {
+    localStorage.setItem('portfolio-lang', lang);
   }
 
   function initLangSwitchers() {
