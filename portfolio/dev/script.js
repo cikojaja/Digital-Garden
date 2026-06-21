@@ -10,8 +10,8 @@ if (mobileToggle && mobileNav) {
     // Animate lines to X
     const lines = mobileToggle.querySelectorAll('span');
     if (mobileNav.classList.contains('open')) {
-      lines[0].style.transform = 'translateY(8px) rotate(45deg)';
-      lines[1].style.transform = 'translateY(-8px) rotate(-45deg)';
+      lines[0].style.transform = 'translateY(4px) rotate(45deg)';
+      lines[1].style.transform = 'translateY(-4px) rotate(-45deg)';
       if (lines[2]) lines[2].style.opacity = '0';
     } else {
       lines[0].style.transform = 'none';
@@ -96,6 +96,7 @@ const COMMANDS = {
   <span class="cmd-highlight">timeline</span>           View journey log timeline
   <span class="cmd-highlight">projects</span>           List selected web systems
   <span class="cmd-highlight">contact</span>            Show direct contact details & socials
+  <span class="cmd-highlight">ls</span>                 List files in directory
   <span class="cmd-highlight">cat [file.json]</span>    Inspect files (e.g. cat bio.json)
   <span class="cmd-highlight">clear</span>              Reset terminal history`;
   },
@@ -188,6 +189,14 @@ working 10-hour kitchen shifts in Hamburg.
 <span style="color: var(--accent-purple);">Click any project card below to view detailed pipeline flow charts!</span>`;
   },
 
+  ls: () => {
+    return `<span style="color: var(--accent-cyan); font-weight: bold;">Directory files:</span>
+  bio.json
+  grind.json
+  skills.json
+  experience.json`;
+  },
+
   sudo: (arg) => {
     if (arg === 'unlock-bonus') {
       return `<span style="color: var(--accent-emerald); font-weight: bold;">Access Granted: Root privileges active.</span>
@@ -266,10 +275,13 @@ function handleCommand(inputStr) {
   if (cmd === 'cat') {
     if (!arg) {
       output = `Error: Please specify a file name. Example: cat bio.json`;
-    } else if (fs[arg]) {
-      output = syntaxHighlightJson(fs[arg]);
     } else {
-      output = `cat: ${arg}: No such file or directory. Type <span class="cmd-highlight">help</span> to list commands.`;
+      const lowerArg = arg.toLowerCase();
+      if (fs[lowerArg]) {
+        output = syntaxHighlightJson(fs[lowerArg]);
+      } else {
+        output = `cat: ${arg}: No such file or directory. Type <span class="cmd-highlight">help</span> to list commands.`;
+      }
     }
   } else if (COMMANDS[cmd]) {
     output = COMMANDS[cmd](arg);
@@ -340,9 +352,9 @@ if (terminalInput) {
 const MODAL_PROJECTS = {
   'smartkartoffel': {
     title: "SmartKartoffel",
-    liveUrl: "../GermanApps/index.html",
+    liveUrl: "https://smartkartoffel.com/",
     appUrl: "../GermanApps/app.html",
-    githubUrl: "https://github.com/cikojaja/Portfolio/tree/main/GermanApps",
+    githubUrl: "https://github.com/cikojaja/Digital-Garden/tree/main/portfolio/GermanApps",
     iconSvg: `<svg class="modal-proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 3c-4.5 0-8 3-8 7.5s2.5 7.5 6 8.5c1.5.5 3 .5 4.5 0 3.5-1 6-4 6-8.5S16.5 3 12 3z" />
       <circle cx="8" cy="9" r="1" fill="currentColor"/>
@@ -388,7 +400,7 @@ const MODAL_PROJECTS = {
   'jpke': {
     title: "JPKE Lead Funnel Pipeline",
     liveUrl: "https://jpke.vercel.app/",
-    githubUrl: "https://github.com/cikojaja/Portfolio",
+    githubUrl: "https://github.com/cikojaja/Digital-Garden/tree/main/portfolio",
     iconSvg: `<svg class="modal-proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 3v18h18" />
       <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
@@ -429,7 +441,7 @@ const MODAL_PROJECTS = {
   'malerei-koenig': {
     title: "Malerei König Estimation Tool",
     liveUrl: "../horst-koenig/index.html",
-    githubUrl: "https://github.com/cikojaja/Portfolio/tree/main/horst-koenig",
+    githubUrl: "https://github.com/cikojaja/Digital-Garden/tree/main/portfolio/horst-koenig",
     iconSvg: `<svg class="modal-proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 3h12v4H6z" />
       <path d="M19 7v2a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7" />
@@ -469,7 +481,7 @@ const MODAL_PROJECTS = {
   'planten-coffee': {
     title: "Planten Coffee Interface",
     liveUrl: "../planten-coffee/index.html",
-    githubUrl: "https://github.com/cikojaja/Portfolio/tree/main/planten-coffee",
+    githubUrl: "https://github.com/cikojaja/Digital-Garden/tree/main/portfolio/planten-coffee",
     iconSvg: `<svg class="modal-proj-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
       <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
@@ -1193,31 +1205,247 @@ if (projectModal) {
   // Initialize decks on load
   function initDecks() {
     projectsDeck = new DeckManager('.project-deck-container', '.project-deck-card');
-    
-    // Stacked social cards expand/collapse logic
-    const stackedCards = document.getElementById('stacked-social-cards');
-    const toggleBtn = document.getElementById('btn-toggle-social');
-    
-    if (stackedCards && toggleBtn) {
-      stackedCards.addEventListener('click', function(e) {
-        if (!stackedCards.classList.contains('is-active')) {
-          stackedCards.classList.add('is-active');
-          toggleBtn.textContent = 'Show less';
-        }
-      });
+  }
 
-      toggleBtn.addEventListener('click', function(e) {
-        if (stackedCards.classList.contains('is-active')) {
-          e.stopPropagation(); // Prevent container click from re-expanding
-          stackedCards.classList.remove('is-active');
-          toggleBtn.textContent = 'Show more';
-        }
-      });
+  const TRANSLATIONS = {
+    en: {
+      "status-badge": "Chef by Day // AI Builder at 4AM",
+      "nav-terminal": "Terminal",
+      "nav-projects": "Projects",
+      "nav-services": "Services",
+      "nav-timeline": "Timeline",
+      "nav-cta": "Get in touch",
+      "folder-projects": "My Projects",
+      "folder-blueprints": "Blueprints",
+      "folder-journey": "My Journey",
+      "hero-title": "AI Engineer &<br>Integration Developer",
+      "hero-desc": "Chef by day. Self-taught builder at 4AM. Based in Hamburg, originally from Bandung. I design AI integrations, automate business workflows, and ship production software — funded entirely by kitchen shifts.",
+      "term-clear-btn": "Clear",
+      "term-initializing": "Initializing 4AM session...",
+      "term-active": "Session: ACTIVE (Chef by day // Builder by night)",
+      "term-location": "Location: Hamburg, Germany 🇩🇪 [Origin: Bandung, Indonesia 🇮🇩]",
+      "term-instructions": "Type <span class=\"cmd-highlight\">help</span> or <span class=\"cmd-highlight\">cat bio.json</span> to inspect the builder's profile.",
+      "term-quick-lbl": "Quick Command:",
+      "term-input-placeholder": "type command...",
+      "section-projects-eyebrow": "Portfolio",
+      "section-projects-title": "Selected Projects",
+      "section-projects-desc": "Hover over any card to bring it to focus, and click to inspect its workflow.",
+      "proj-smartkartoffel-badge": "SaaS Startup",
+      "proj-smartkartoffel-desc": "An AI German tutor explaining grammar in 25 languages. Features speech practice, real-time corrections, and a Camera Scan Lookup that extracts text from real-world German packaging or menus instantly.",
+      "proj-smartkartoffel-det1": "Camera OCR — scan menus, packaging, signs",
+      "proj-smartkartoffel-det2": "25 native languages, &lt; 1.2s latency",
+      "proj-smartkartoffel-det3": "Whisper speech practice + real-time corrections",
+      "proj-jpke-badge": "AI Automation",
+      "proj-jpke-desc": "A functional lead pipeline featuring an <strong>automated qualification chatbot with real-time English-German translation</strong>. Filters serious inquiries, compiles bilingual summaries, and automatically syncs client details directly to a <strong>Notion CRM database</strong> using custom webhooks.",
+      "proj-jpke-det1": "Bilingual chatbot — DE / EN qualification",
+      "proj-jpke-det2": "Zero admin — 100% automated lead capture",
+      "proj-jpke-det3": "Notion CRM sync via official API",
+      "proj-koenig-badge": "Performance Study",
+      "proj-koenig-desc": "A high-performance pricing and automation system for a service business. Features a dynamic interactive cost-calculator and an optimized frontend rendering engine achieving a 98/100 Lighthouse performance rating under 100ms layout shift.",
+      "proj-koenig-det1": "98/100 Lighthouse — zero layout shift",
+      "proj-koenig-det2": "React dynamic cost calculator",
+      "proj-koenig-det3": "Live pricing engine under 100ms",
+      "proj-planten-badge": "Client Interface",
+      "proj-planten-desc": "A responsive, interactive digital menu interface designed for retail. Showcases custom SVG micro-animations, localStorage shopping cart state management, and optimized render paths.",
+      "proj-planten-det1": "12 custom SVG micro-animations",
+      "proj-planten-det2": "localStorage cart — zero backend",
+      "proj-planten-det3": "Optimized static bundle, instant load",
+      "section-blueprints-eyebrow": "Integration Blueprints",
+      "section-blueprints-title": "Active Backend Automation Pipelines",
+      "section-blueprints-desc": "Real-time data flows visualizing custom webhook systems, API connections, and automated CRM syncs.",
+      "bp-smartkartoffel-desc": "Automatically logs client feedback, analyzes sentiment, and dispatches mailbox alerts with zero admin overhead.",
+      "bp-smartkartoffel-n1-title": "User Feedback",
+      "bp-smartkartoffel-n1-sub": "Trigger Inbound",
+      "bp-smartkartoffel-n2-title": "AI Sentiment",
+      "bp-smartkartoffel-n2-sub": "GPT Priority Flag",
+      "bp-smartkartoffel-n3-title": "Notion Tasks",
+      "bp-smartkartoffel-n3-sub": "CRM Database Log",
+      "bp-smartkartoffel-n4-title": "Mail Notification",
+      "bp-smartkartoffel-n4-sub": "Owner Inbox SMTP",
+      "bp-jpke-desc": "Qualifies incoming visitors, compiling and saving answers to push CRM data to Notion and automatically generate calendar appointment slots.",
+      "bp-jpke-n1-title": "Chatbot Inbound",
+      "bp-jpke-n1-sub": "Intent Qualifier",
+      "bp-jpke-n2-title": "Lead Summary",
+      "bp-jpke-n2-sub": "Bilingual Processing",
+      "bp-jpke-n3-title": "Notion CRM",
+      "bp-jpke-n3-sub": "Board Record Synced",
+      "bp-jpke-n4-title": "Calendar API",
+      "bp-jpke-n4-sub": "Create Appointment",
+      "section-services-eyebrow": "Services",
+      "section-services-title": "What I Do",
+      "section-services-desc": "Highly specialized consulting and engineering services to automate, optimize, and intelligent-charge your digital workflows.",
+      "tab-ai": "✦ AI Systems",
+      "tab-webhooks": "⚙ Webhooks",
+      "tab-apps": "💻 Web Apps",
+      "service-ai-title": "AI System & LLM Integrations",
+      "service-ai-desc": "Connecting backend applications to Large Language Models. Custom prompt schemas, OpenAI API orchestration, speech-to-text workflows, structured JSON parsers, and camera OCR text scanning tools.",
+      "service-ai-det1": "System prompt architecture & optimization",
+      "service-ai-det2": "Whisper & TTS voice synthesis pipelines",
+      "service-ai-det3": "Multi-language translation models",
+      "service-webhooks-badge": "Automation",
+      "service-webhooks-title": "Webhooks & API Pipelines",
+      "service-webhooks-desc": "Connecting user actions directly to CRM and team dashboards. Custom webhook setups qualifying prospects, syncing records to Notion boards, calendar APIs, and SMTP notifications.",
+      "service-webhooks-det1": "Notion API lead boards",
+      "service-webhooks-det2": "Google Calendar & Meet bookings",
+      "service-webhooks-det3": "SMTP & Mailer integrations",
+      "service-apps-badge": "Development",
+      "service-apps-title": "High-Performance Web Apps",
+      "service-apps-desc": "Highly responsive frontend layers with zero layout shifts. Specialized in dynamic pricing calculators, localStorage state cards, custom vector animations, and Next.js / React views.",
+      "service-apps-det1": "95+ Lighthouse audits",
+      "service-apps-det2": "Interactive dynamic calculations",
+      "service-apps-det3": "Offline localStorage persistence",
+      "section-timeline-eyebrow": "Experience",
+      "section-timeline-title": "Journey Log",
+      "journey-smartkartoffel-role": "Founder & Solo Engineer",
+      "journey-smartkartoffel-company": "SmartKartoffel (EdTech SaaS)",
+      "journey-smartkartoffel-desc": "Designed and coded an AI German tutor explaining grammar in 25 native languages. Engineered prompt schemas, translation pipelines, SQL user metrics, and payment gateway syncs at 4AM before starting kitchen shifts.",
+      "journey-chef-role": "Professional Chef",
+      "journey-chef-company": "Gastronomy Industry (Hamburg)",
+      "journey-chef-desc": "Executing high-pressure culinary operations in 10-hour shifts. Self-funding all software development, hosting, and API subscription costs to maintain complete independence.",
+      "journey-freelance-role": "Full-Stack Developer",
+      "journey-freelance-company": "Freelance Web Engineering",
+      "journey-freelance-desc": "Programmed custom booking layers, calculators, and API interfaces (JPKE Leadbot, Malerei König cost estimator, Planten Coffee) scoring &gt;95 on Lighthouse performance rankings.",
+      "cta-title": "Let's build something remarkable.",
+      "cta-desc": "Seeking software engineering roles or builder connections. Let's discuss how I can bring high-pressure execution speed, discipline, and product design experience to your team.",
+      "cta-btn-email": "Send Email",
+      "cta-btn-social": "Get Social Links",
+      "footer-text": "© 2026 Ciko. All rights reserved.",
+      "footer-main": "Main Portfolio",
+      "footer-contact": "Contact"
+    },
+    de: {
+      "status-badge": "Tagsüber Koch // KI-Entwickler um 4 Uhr morgens",
+      "nav-terminal": "Terminal",
+      "nav-projects": "Projekte",
+      "nav-services": "Leistungen",
+      "nav-timeline": "Timeline",
+      "nav-cta": "Kontakt aufnehmen",
+      "folder-projects": "Projekte",
+      "folder-blueprints": "Blaupausen",
+      "folder-journey": "Mein Werdegang",
+      "hero-title": "KI-Ingenieur &<br>Integrations-Entwickler",
+      "hero-desc": "Tagsüber Koch. Autodidaktischer Entwickler um 4 Uhr morgens. Ansässig in Hamburg, ursprünglich aus Bandung. Ich entwerfe KI-Integrationen, automatisiere Geschäftsabläufe und entwickle produktive Software – finanziert durch Küchenschichten.",
+      "term-clear-btn": "Löschen",
+      "term-initializing": "Initialisiere 4-Uhr-Sitzung...",
+      "term-active": "Sitzung: AKTIV (Koch am Tag // Entwickler in der Nacht)",
+      "term-location": "Standort: Hamburg, Deutschland 🇩🇪 [Herkunft: Bandung, Indonesien 🇮🇩]",
+      "term-instructions": "Geben Sie <span class=\"cmd-highlight\">help</span> oder <span class=\"cmd-highlight\">cat bio.json</span> ein, um das Profil anzuzeigen.",
+      "term-quick-lbl": "Schnellbefehl:",
+      "term-input-placeholder": "Befehl eingeben...",
+      "section-projects-eyebrow": "Portfolio",
+      "section-projects-title": "Ausgewählte Projekte",
+      "section-projects-desc": "Bewegen Sie den Mauszeiger über eine Karte, um sie zu fokussieren, und klicken Sie, um den Workflow anzuzeigen.",
+      "proj-smartkartoffel-badge": "SaaS-Startup",
+      "proj-smartkartoffel-desc": "Ein KI-Deutschlehrer, der Grammatik in 25 Sprachen erklärt. Bietet Sprechübungen, Echtzeit-Korrekturen und eine Kamera-Scan-Suche, die Text von Verpackungen oder Speisekarten sofort übersetzt.",
+      "proj-smartkartoffel-det1": "Kamera-OCR — Scannen von Speisekarten, Verpackungen, Schildern",
+      "proj-smartkartoffel-det2": "25 Muttersprachen, &lt; 1,2 s Latenz",
+      "proj-smartkartoffel-det3": "Whisper-Sprechübungen + Echtzeit-Korrekturen",
+      "proj-jpke-badge": "KI-Automatisierung",
+      "proj-jpke-desc": "Eine funktionale Lead-Pipeline mit einem <strong>automatisierten Qualifizierungs-Chatbot mit Echtzeit-Übersetzung (DE/EN)</strong>. Filtert Anfragen, erstellt zweisprachige Zusammenfassungen und synchronisiert Daten mit einer <strong>Notion-CRM-Datenbank</strong>.",
+      "proj-jpke-det1": "Zweisprachiger Chatbot — DE / EN Qualifizierung",
+      "proj-jpke-det2": "Kein Admin — 100% automatisierte Lead-Erfassung",
+      "proj-jpke-det3": "Notion CRM-Synchronisierung über offizielle API",
+      "proj-koenig-badge": "Performance-Studie",
+      "proj-koenig-desc": "Ein leistungsstarkes Preiskalkulations- und Automatisierungssystem für Dienstleister. Bietet einen interaktiven Kostenrechner und eine optimierte Frontend-Rendering-Engine mit 98/100 Lighthouse-Score bei unter 100 ms Layout-Shift.",
+      "proj-koenig-det1": "98/100 Lighthouse — kein Layout-Shift",
+      "proj-koenig-det2": "Dynamischer Kostenrechner (React)",
+      "proj-koenig-det3": "Live-Preiskalkulation in unter 100 ms",
+      "proj-planten-badge": "Kunden-Interface",
+      "proj-planten-desc": "Eine reaktionsschnelle, interaktive digitale Menüoberfläche für den Einzelhandel. Bietet angepasste SVG-Mikroanimationen, localStorage-Warenkorb-Verwaltung und optimierte Renderpfade.",
+      "proj-planten-det1": "12 angepasste SVG-Mikroanimationen",
+      "proj-planten-det2": "localStorage-Warenkorb — kein Backend nötig",
+      "proj-planten-det3": "Optimiertes statisches Bundle, sofortige Ladezeit",
+      "section-blueprints-eyebrow": "Integrations-Blaupausen",
+      "section-blueprints-title": "Aktive Backend-Automatisierungs-Pipelines",
+      "section-blueprints-desc": "Echtzeit-Datenflüsse zur Visualisierung von Webhook-Systemen, API-Verbindungen und CRM-Synchronisierungen.",
+      "bp-smartkartoffel-desc": "Protokolliert automatisch Benutzer-Feedback, analysiert die Stimmung und versendet Benachrichtigungen ohne administrativen Aufwand.",
+      "bp-smartkartoffel-n1-title": "Benutzer-Feedback",
+      "bp-smartkartoffel-n1-sub": "Eingehender Trigger",
+      "bp-smartkartoffel-n2-title": "KI-Stimmung",
+      "bp-smartkartoffel-n2-sub": "GPT-Prioritäts-Flag",
+      "bp-smartkartoffel-n3-title": "Notion-Aufgaben",
+      "bp-smartkartoffel-n3-sub": "CRM-Datenbank-Protokoll",
+      "bp-smartkartoffel-n4-title": "E-Mail-Meldung",
+      "bp-smartkartoffel-n4-sub": "SMTP-Posteingang",
+      "bp-jpke-desc": "Qualifiziert eingehende Besucher, sammelt Antworten für Notion-CRM und generiert automatisch Termine im Kalender.",
+      "bp-jpke-n1-title": "Chatbot-Eingang",
+      "bp-jpke-n1-sub": "Absichts-Qualifizierung",
+      "bp-jpke-n2-title": "Lead-Zusammenfassung",
+      "bp-jpke-n2-sub": "Zweisprachige Verarbeitung",
+      "bp-jpke-n3-title": "Notion CRM",
+      "bp-jpke-n3-sub": "Daten synchronisiert",
+      "bp-jpke-n4-title": "Kalender-API",
+      "bp-jpke-n4-sub": "Termin erstellen",
+      "section-services-eyebrow": "Dienstleistungen",
+      "section-services-title": "Was ich anbiete",
+      "section-services-desc": "Spezialisierte Beratung und Entwicklung zur Automatisierung, Optimierung und intelligenten Erweiterung digitaler Arbeitsabläufe.",
+      "tab-ai": "✦ KI-Systeme",
+      "tab-webhooks": "⚙ Webhooks",
+      "tab-apps": "💻 Web-Apps",
+      "service-ai-title": "KI-System- & LLM-Integrationen",
+      "service-ai-desc": "Anbindung von Backend-Anwendungen an Large Language Models. Eigene Prompt-Architekturen, OpenAI-Orchestrierung, Speech-to-Text-Abläufe, strukturierte JSON-Parser und Kamera-OCR-Textscanner.",
+      "service-ai-det1": "System-Prompt-Architektur & Optimierung",
+      "service-ai-det2": "Whisper- & TTS-Sprachsynthese-Pipelines",
+      "service-ai-det3": "Mehrsprachige Übersetzungsmodelle",
+      "service-webhooks-badge": "Automatisierung",
+      "service-webhooks-title": "Webhooks & API-Pipelines",
+      "service-webhooks-desc": "Direkte Verbindung von Benutzeraktionen mit CRM- und Team-Dashboards. Eigene Webhooks zur Lead-Qualifizierung, Notion-Synchronisation, Kalender-Anbindungen und E-Mail-Benachrichtigungen.",
+      "service-webhooks-det1": "Notion API Lead-Boards",
+      "service-webhooks-det2": "Google Kalender- & Meet-Buchungen",
+      "service-webhooks-det3": "SMTP- & Mailer-Integrationen",
+      "service-apps-badge": "Entwicklung",
+      "service-apps-title": "Leistungsstarke Web-Apps",
+      "service-apps-desc": "Reaktionsschnelle Frontends ohne Layout-Shifts. Spezialisiert auf dynamische Preiskalkulatoren, localStorage-Zustände, angepasste Vektor-Animationen und Next.js-/React-Ansichten.",
+      "service-apps-det1": "95+ Lighthouse-Audits",
+      "service-apps-det2": "Interaktive, dynamische Berechnungen",
+      "service-apps-det3": "Offline localStorage-Persistenz",
+      "section-timeline-eyebrow": "Erfahrung",
+      "section-timeline-title": "Mein Werdegang",
+      "journey-smartkartoffel-role": "Gründer & Solo-Entwickler",
+      "journey-smartkartoffel-company": "SmartKartoffel (EdTech-SaaS)",
+      "journey-smartkartoffel-desc": "Konzipierte und programmierte einen KI-Deutschlehrer, der Grammatik in 25 Muttersprachen erklärt. Entwickelte Prompt-Strukturen, Übersetzungs-Pipelines, SQL-Statistiken und Zahlungsschnittstellen um 4 Uhr morgens vor den Küchenschichten.",
+      "journey-chef-role": "Küchenchef / Koch",
+      "journey-chef-company": "Gastronomie-Branche (Hamburg)",
+      "journey-chef-desc": "Leitung stressiger Abläufe in 10-Stunden-Küchenschichten. Eigenfinanzierung aller Software-Entwicklungs-, Hosting- und API-Kosten zur Wahrung vollständiger Unabhängigkeit.",
+      "journey-freelance-role": "Full-Stack-Entwickler",
+      "journey-freelance-company": "Freiberufliche Webentwicklung",
+      "journey-freelance-desc": "Programmierte Buchungsebenen, Rechner und API-Schnittstellen (JPKE Leadbot, Malerei König Kostenrechner, Planten Coffee) mit Lighthouse-Werten über 95.",
+      "cta-title": "Lassen Sie uns etwas Großartiges bauen.",
+      "cta-desc": "Auf der Suche nach Software-Entwicklungsstellen oder Kontakten zu anderen Makern. Lassen Sie uns besprechen, wie ich meine Erfahrung, Disziplin und Umsetzungsstärke in Ihr Team einbringen kann.",
+      "cta-btn-email": "E-Mail senden",
+      "cta-btn-social": "Social Links abrufen",
+      "footer-text": "© 2026 Ciko. Alle Rechte vorbehalten.",
+      "footer-main": "Haupt-Portfolio",
+      "footer-contact": "Kontakt"
     }
+  };
+
+  function updateTranslations(lang) {
+    const elements = document.querySelectorAll('[data-translate-id]');
+    elements.forEach(el => {
+      const id = el.getAttribute('data-translate-id');
+      if (TRANSLATIONS[lang] && TRANSLATIONS[lang][id]) {
+        if (el.tagName === 'INPUT') {
+          el.setAttribute('placeholder', TRANSLATIONS[lang][id]);
+        } else {
+          el.innerHTML = TRANSLATIONS[lang][id];
+        }
+      }
+    });
+
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+      if (btn.getAttribute('data-lang') === lang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
   function setLanguage(lang) {
     localStorage.setItem('portfolio-lang', lang);
+    updateTranslations(lang);
   }
 
   function initLangSwitchers() {

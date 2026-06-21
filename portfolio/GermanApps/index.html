@@ -207,9 +207,14 @@
       flex-shrink: 0;
       opacity: 1;
       animation: kartFloat 5s ease-in-out infinite;
-      pointer-events: none; z-index: 2;
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 2;
       transform-origin: center center;
       will-change: transform, opacity;
+    }
+    .hero-kart.spinning {
+      animation: kart-spin 0.5s cubic-bezier(.36,.07,.19,.97) both !important;
     }
     @keyframes kartFloat {
       0%,100% { transform: rotate(-6deg) scale(1); }
@@ -2065,6 +2070,17 @@
       appendAiMsg(reply);
     }, 800);
   }
+
+  // Mascot click spin effect
+  (function() {
+    const kart = document.getElementById('heroKart');
+    if (kart) {
+      kart.addEventListener('click', () => {
+        kart.classList.add('spinning');
+        setTimeout(() => kart.classList.remove('spinning'), 500);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
