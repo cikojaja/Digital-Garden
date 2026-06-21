@@ -3212,4 +3212,14 @@ footer {
   }
 }
 
+/* CTA Card text cropping fix for mobile viewports */
+@media (max-width: 576px) {
+  .cta-card {
+    padding: 40px 20px !important;
+  }
+  .cta-card h2 {
+    font-size: 22px !important;
+  }
+}
+
 
