@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "rewrites": [
     {
       "source": "/:path((?!GermanApps|horst-koenig|planten-coffee|food_assets|oktoberfest_assets|preview|odoo_practice|dev|portfolio_a4|setcard).*)",
