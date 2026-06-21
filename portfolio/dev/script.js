@@ -1106,7 +1106,7 @@ if (projectModal) {
 
 // ── Mobile Layout Switching & Interactions Demo ──
 (function() {
-  // Generic Deck Manager Class
+  // Enhanced Deck Manager Class with bidirectional cycling and touch swipe gestures
   class DeckManager {
     constructor(containerSelector, cardSelector) {
       this.container = document.querySelector(containerSelector);
@@ -1131,11 +1131,39 @@ if (projectModal) {
             if (!isFront) {
               e.preventDefault();
               e.stopPropagation();
-              this.cycle();
+              this.cycle(true);
             }
           }
         }, { capture: true });
       });
+
+      // 3. Touch swipe handler for mobile swipe navigation
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      this.container.addEventListener('touchstart', (e) => {
+        if (this.container.classList.contains('layout-deck')) {
+          touchStartX = e.changedTouches[0].screenX;
+        }
+      }, { passive: true });
+
+      this.container.addEventListener('touchend', (e) => {
+        if (this.container.classList.contains('layout-deck')) {
+          touchEndX = e.changedTouches[0].screenX;
+          this.handleSwipe(touchStartX, touchEndX);
+        }
+      }, { passive: true });
+    }
+
+    handleSwipe(start, end) {
+      const threshold = 50; // min distance for swipe in pixels
+      if (end < start - threshold) {
+        // Swipe left -> cycle forward
+        this.cycle(true);
+      } else if (end > start + threshold) {
+        // Swipe right -> cycle backward
+        this.cycle(false);
+      }
     }
     
     updateClasses() {
@@ -1155,27 +1183,72 @@ if (projectModal) {
           card.classList.add('deck-hidden');
         }
       });
+
+      // Update active dot in indicators
+      const dots = document.querySelectorAll('.mobile-carousel-indicator .dot');
+      if (dots.length > 0) {
+        const frontIdx = this.order[0];
+        dots.forEach((dot, dIdx) => {
+          if (dIdx === frontIdx) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
     }
     
-    cycle() {
+    cycle(forward = true) {
       if (this.isAnimating) return;
       this.isAnimating = true;
       
       const frontIdx = this.order[0];
       const frontCard = this.cards[frontIdx];
       
-      // Animate slide-out
+      if (forward) {
+        // Animate slide-out forward
+        frontCard.classList.add('deck-transition-out');
+        setTimeout(() => {
+          this.order.push(this.order.shift());
+          this.updateClasses();
+          this.isAnimating = false;
+        }, 350);
+      } else {
+        // Cycle backward: bring back card to front
+        this.order.unshift(this.order.pop());
+        const newFrontIdx = this.order[0];
+        const newFrontCard = this.cards[newFrontIdx];
+        newFrontCard.classList.add('deck-transition-out'); // Start from transitioned out state
+        this.updateClasses();
+        
+        // Force reflow
+        newFrontCard.offsetHeight;
+        
+        newFrontCard.classList.remove('deck-transition-out');
+        setTimeout(() => {
+          this.isAnimating = false;
+        }, 350);
+      }
+    }
+
+    setIndex(targetIdx) {
+      if (this.isAnimating) return;
+      const currentFrontIdx = this.order[0];
+      if (currentFrontIdx === targetIdx) return;
+
+      this.isAnimating = true;
+      const frontCard = this.cards[currentFrontIdx];
       frontCard.classList.add('deck-transition-out');
-      
+
       setTimeout(() => {
-        this.order.push(this.order.shift());
+        while (this.order[0] !== targetIdx) {
+          this.order.push(this.order.shift());
+        }
         this.updateClasses();
         this.isAnimating = false;
       }, 350);
     }
   }
-
-  let projectsDeck = null;
 
   // Global Tab switcher for Services Bento Dash-Tab
   window.setServiceActiveTab = function(index) {
@@ -1204,7 +1277,7 @@ if (projectModal) {
 
   // Initialize decks on load
   function initDecks() {
-    projectsDeck = new DeckManager('.project-deck-container', '.project-deck-card');
+    window.projectsDeck = new DeckManager('.project-deck-container', '.project-deck-card');
   }
 
   const TRANSLATIONS = {

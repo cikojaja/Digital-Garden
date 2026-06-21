@@ -414,12 +414,20 @@
         </div>
       </div>
 
-      <!-- Mobile Carousel Indicators -->
-      <div class="mobile-carousel-indicator">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <!-- Mobile Carousel Navigation Controls -->
+      <div class="deck-navigation">
+        <button class="deck-nav-btn prev-btn" onclick="window.projectsDeck.cycle(false)" aria-label="Previous Project">
+          ←
+        </button>
+        <div class="mobile-carousel-indicator">
+          <span class="dot active" onclick="window.projectsDeck.setIndex(0)"></span>
+          <span class="dot" onclick="window.projectsDeck.setIndex(1)"></span>
+          <span class="dot" onclick="window.projectsDeck.setIndex(2)"></span>
+          <span class="dot" onclick="window.projectsDeck.setIndex(3)"></span>
+        </div>
+        <button class="deck-nav-btn next-btn" onclick="window.projectsDeck.cycle(true)" aria-label="Next Project">
+          →
+        </button>
       </div>
 
       <!-- Integration Blueprints Section -->
