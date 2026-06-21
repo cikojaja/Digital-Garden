@@ -39,6 +39,8 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-dark);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -48,6 +50,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
+  width: 100%;
 }
 
 /* ── Custom Background Glows ────────────────────────────── */
@@ -2513,6 +2516,7 @@ footer {
     box-shadow: none !important;
     margin-top: 40px;
     width: 100% !important;
+    margin-left: 0 !important;
   }
   .project-deck-container.layout-deck .project-deck-card {
     position: absolute !important;
@@ -3175,6 +3179,14 @@ footer {
     border-color: var(--accent-cyan) !important;
     color: var(--text-primary) !important;
     box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
+  }
+
+  .deck-nav-btn svg {
+    transition: transform 0.2s ease !important;
+  }
+
+  .deck-nav-btn:hover svg {
+    transform: scale(1.1) !important;
   }
 
   .mobile-carousel-indicator {

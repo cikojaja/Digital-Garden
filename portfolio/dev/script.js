@@ -1139,30 +1139,40 @@ if (projectModal) {
 
       // 3. Touch swipe handler for mobile swipe navigation
       let touchStartX = 0;
+      let touchStartY = 0;
       let touchEndX = 0;
+      let touchEndY = 0;
 
       this.container.addEventListener('touchstart', (e) => {
         if (this.container.classList.contains('layout-deck')) {
-          touchStartX = e.changedTouches[0].screenX;
+          touchStartX = e.changedTouches[0].clientX;
+          touchStartY = e.changedTouches[0].clientY;
         }
       }, { passive: true });
 
       this.container.addEventListener('touchend', (e) => {
         if (this.container.classList.contains('layout-deck')) {
-          touchEndX = e.changedTouches[0].screenX;
-          this.handleSwipe(touchStartX, touchEndX);
+          touchEndX = e.changedTouches[0].clientX;
+          touchEndY = e.changedTouches[0].clientY;
+          this.handleSwipe(touchStartX, touchEndX, touchStartY, touchEndY);
         }
       }, { passive: true });
     }
 
-    handleSwipe(start, end) {
+    handleSwipe(startX, endX, startY, endY) {
       const threshold = 50; // min distance for swipe in pixels
-      if (end < start - threshold) {
-        // Swipe left -> cycle forward
-        this.cycle(true);
-      } else if (end > start + threshold) {
-        // Swipe right -> cycle backward
-        this.cycle(false);
+      const diffX = endX - startX;
+      const diffY = endY - startY;
+
+      // Ensure horizontal swipe is dominant and exceeds threshold
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+        if (diffX < 0) {
+          // Swipe left -> cycle forward
+          this.cycle(true);
+        } else {
+          // Swipe right -> cycle backward
+          this.cycle(false);
+        }
       }
     }
     
