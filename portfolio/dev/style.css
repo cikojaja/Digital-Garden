@@ -1267,21 +1267,21 @@ footer {
     text-align: center;
     height: auto;
     min-height: auto;
-    padding: 40px 0;
+    padding: 0 0 40px 0;
   }
   .hero-bg-character-container {
     position: relative;
     width: 100%;
     height: 350px;
     order: 1;
-    margin-top: 60px;
+    margin-top: 0;
     overflow: hidden;
   }
   .hero-bg-character-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: 30% center;
   }
   .hero-content-container {
     order: 2;
